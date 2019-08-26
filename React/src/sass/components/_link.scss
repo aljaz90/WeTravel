@@ -1,0 +1,21 @@
+.link {
+    color: $color-grey-2;
+    transition: all .2s;
+    display: inline-block;
+    text-transform: uppercase;
+
+    &:link,
+    &:visited,
+    &:focus {
+        color: $color-grey-2;
+        text-decoration: none;
+        outline: none;
+    }
+
+    &:hover {
+        color: $color-white;
+        background-image: linear-gradient(to right bottom, rgba($color-secondary-light, 0.9), rgba($color-secondary-dark, 1));
+        transform: skewX(-11deg) skewY(2deg) scale(1.2);   
+        text-shadow: .5rem 1rem 2rem rgba(black, .2); 
+    }
+}  
