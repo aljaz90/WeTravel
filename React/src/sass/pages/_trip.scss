@@ -1,0 +1,75 @@
+.flights {
+    grid-row: 1 / 2;
+    grid-column: center-start / center-end;
+    background-color: $color-white-2;
+    display: grid;
+    grid-template-columns: 1fr; 
+    grid-row-gap: 2rem;
+    margin-top: 8rem;
+
+    &--item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: $color-white;
+        height: 26rem;
+        box-shadow: 0 1.5rem 4rem rgba(0,0,0,0.15);
+        transition: all .4s;
+        cursor: pointer;
+        border-radius: 4px;
+        overflow: hidden;
+        padding-left: 3rem;
+
+        &:hover {
+            box-shadow: 0 1.5rem 2rem rgba(0,0,0,0.15);
+            transform: scale(1.06) translateY(0);
+        }
+
+        &--outbound, &--inbound {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+
+            &--carrier-image {
+                height: 8rem;
+                background-repeat: no-repeat;
+            }
+    
+            &--title {
+    
+            }
+
+            &--stops {
+
+            }
+
+            &--duration {
+                 
+            }
+        }
+
+        &--details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+            padding: 2rem 3rem;
+
+            &--price {
+                font-size: 3.2rem;
+                color: $color-white;
+                font-weight: 100;
+                font-family: $font-heading;
+            }
+
+            &--book {
+
+            }
+            
+            &--price + &--book {
+                margin-top: 2rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,310 @@
+[
+    {
+      "outboundFlight": {
+        "carrier": {
+          "Id": 1285,
+          "Code": "JU",
+          "Name": "Air Serbia",
+          "ImageUrl": "https://s1.apideeplink.com/images/airlines/JU.png",
+          "DisplayCode": "JU"
+        },
+        "segments": [
+          {
+            "originPlace": {
+              "code": "AMS",
+              "type": "Airport",
+              "name": "Amsterdam"
+            },
+            "destinationPlace": {
+              "code": "BEG",
+              "type": "Airport",
+              "name": "Belgrade Nikola Tesla"
+            },
+            "departureDateTime": "2019-09-02T21:10:00",
+            "arrivalDateTime": "2019-09-02T23:25:00",
+            "operatingCarrier": {
+              "Id": 1285,
+              "Code": "JU",
+              "Name": "Air Serbia",
+              "ImageUrl": "https://s1.apideeplink.com/images/airlines/JU.png",
+              "DisplayCode": "JU"
+            },
+            "duration": 135,
+            "flightNumber": "JU 365"
+          },
+          {
+            "originPlace": {
+              "code": "BEG",
+              "type": "Airport",
+              "name": "Belgrade Nikola Tesla"
+            },
+            "destinationPlace": {
+              "code": "LJU",
+              "type": "Airport",
+              "name": "Ljubljana"
+            },
+            "departureDateTime": "2019-09-03T07:35:00",
+            "arrivalDateTime": "2019-09-03T09:00:00",
+            "operatingCarrier": {
+              "Id": 1285,
+              "Code": "JU",
+              "Name": "Air Serbia",
+              "ImageUrl": "https://s1.apideeplink.com/images/airlines/JU.png",
+              "DisplayCode": "JU"
+            },
+            "duration": 85,
+            "flightNumber": "JU 190"
+          }
+        ],
+        "stops": [
+          {
+            "code": "BEG",
+            "type": "Airport",
+            "name": "Belgrade Nikola Tesla"
+          }
+        ],
+        "totalDuration": 710,
+        "originPlace": {
+          "code": "AMS",
+          "type": "Airport",
+          "name": "Amsterdam"
+        },
+        "destinationPlace": {
+          "code": "LJU",
+          "type": "Airport",
+          "name": "Ljubljana"
+        }
+      },
+      "inboundFlight": {
+        "carrier": {
+          "Id": 1285,
+          "Code": "JU",
+          "Name": "Air Serbia",
+          "ImageUrl": "https://s1.apideeplink.com/images/airlines/JU.png",
+          "DisplayCode": "JU"
+        },
+        "segments": [
+          {
+            "originPlace": {
+              "code": "LJU",
+              "type": "Airport",
+              "name": "Ljubljana"
+            },
+            "destinationPlace": {
+              "code": "BEG",
+              "type": "Airport",
+              "name": "Belgrade Nikola Tesla"
+            },
+            "departureDateTime": "2019-09-04T10:05:00",
+            "arrivalDateTime": "2019-09-04T11:25:00",
+            "operatingCarrier": {
+              "Id": 1285,
+              "Code": "JU",
+              "Name": "Air Serbia",
+              "ImageUrl": "https://s1.apideeplink.com/images/airlines/JU.png",
+              "DisplayCode": "JU"
+            },
+            "duration": 80,
+            "flightNumber": "JU 191"
+          },
+          {
+            "originPlace": {
+              "code": "BEG",
+              "type": "Airport",
+              "name": "Belgrade Nikola Tesla"
+            },
+            "destinationPlace": {
+              "code": "AMS",
+              "type": "Airport",
+              "name": "Amsterdam"
+            },
+            "departureDateTime": "2019-09-04T17:50:00",
+            "arrivalDateTime": "2019-09-04T20:20:00",
+            "operatingCarrier": {
+              "Id": 1285,
+              "Code": "JU",
+              "Name": "Air Serbia",
+              "ImageUrl": "https://s1.apideeplink.com/images/airlines/JU.png",
+              "DisplayCode": "JU"
+            },
+            "duration": 150,
+            "flightNumber": "JU 364"
+          }
+        ],
+        "stops": [
+          {
+            "code": "BEG",
+            "type": "Airport",
+            "name": "Belgrade Nikola Tesla"
+          }
+        ],
+        "totalDuration": 615,
+        "originPlace": {
+          "code": "LJU",
+          "type": "Airport",
+          "name": "Ljubljana"
+        },
+        "destinationPlace": {
+          "code": "AMS",
+          "type": "Airport",
+          "name": "Amsterdam"
+        }
+      },
+      "price": 255.63,
+      "offerLink": "http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=NqagL4PVt5peZGMG189S4zg4dm39CEoR%2bV8UrnEXQEuJZ36mI8cG9Fi4G8qRAMyN&url=https%3a%2f%2fwww.skyscanner.net%2ftransport_deeplink%2f4.0%2fUK%2fen-GB%2fEUR%2fjaty%2f2%2f9451.13589.2019-09-02%2c13589.9451.2019-09-04%2fair%2fairli%2fflights%3fitinerary%3dflight%7c-32181%7c365%7c9451%7c2019-09-02T21%3a10%7c9817%7c2019-09-02T23%3a25%7c135%7cUNBRNL%7cU%7c-%3bflight%7c-32181%7c190%7c9817%7c2019-09-03T07%3a35%7c13589%7c2019-09-03T09%3a00%7c85%7cUNBRNL%7cU%7c-%2cflight%7c-32181%7c191%7c13589%7c2019-09-04T10%3a05%7c9817%7c2019-09-04T11%3a25%7c80%7cLNBRNL%7cL%7c-%3bflight%7c-32181%7c364%7c9817%7c2019-09-04T17%3a50%7c9451%7c2019-09-04T20%3a20%7c150%7cLNBRNL%7cL%7c-%26carriers%3d-32181%26operators%3d-32181%3b-32181%2c-32181%3b-32181%26passengers%3d1%26channel%3ddataapi%26cabin_class%3deconomy%26facilitated%3dfalse%26ticket_price%3d255.63%26is_npt%3dfalse%26is_multipart%3dfalse%26client_id%3dskyscanner_b2b%26q_ids%3djaty.9451.13589.190902.190904.1..E%7c-6285824834463315669%26q_sources%3dJACQUARD%26commercial_filters%3dfalse%26q_datetime_utc%3d2019-08-31T10%3a41%3a00%26source_website_id%3damac%26pqid%3dfalse"
+    },
+    {
+      "outboundFlight": {
+        "carrier": {
+          "Id": 1375,
+          "Code": "LO",
+          "Name": "LOT",
+          "ImageUrl": "https://s1.apideeplink.com/images/airlines/LO.png",
+          "DisplayCode": "LO"
+        },
+        "segments": [
+          {
+            "originPlace": {
+              "code": "AMS",
+              "type": "Airport",
+              "name": "Amsterdam"
+            },
+            "destinationPlace": {
+              "code": "WAW",
+              "type": "Airport",
+              "name": "Warsaw Chopin"
+            },
+            "departureDateTime": "2019-09-02T07:00:00",
+            "arrivalDateTime": "2019-09-02T09:00:00",
+            "operatingCarrier": {
+              "Id": 1375,
+              "Code": "LO",
+              "Name": "LOT",
+              "ImageUrl": "https://s1.apideeplink.com/images/airlines/LO.png",
+              "DisplayCode": "LO"
+            },
+            "duration": 120,
+            "flightNumber": "LO 270"
+          },
+          {
+            "originPlace": {
+              "code": "WAW",
+              "type": "Airport",
+              "name": "Warsaw Chopin"
+            },
+            "destinationPlace": {
+              "code": "LJU",
+              "type": "Airport",
+              "name": "Ljubljana"
+            },
+            "departureDateTime": "2019-09-02T11:20:00",
+            "arrivalDateTime": "2019-09-02T13:05:00",
+            "operatingCarrier": {
+              "Id": 1375,
+              "Code": "LO",
+              "Name": "LOT",
+              "ImageUrl": "https://s1.apideeplink.com/images/airlines/LO.png",
+              "DisplayCode": "LO"
+            },
+            "duration": 105,
+            "flightNumber": "LO 615"
+          }
+        ],
+        "stops": [
+          {
+            "code": "WAW",
+            "type": "Airport",
+            "name": "Warsaw Chopin"
+          }
+        ],
+        "totalDuration": 365,
+        "originPlace": {
+          "code": "AMS",
+          "type": "Airport",
+          "name": "Amsterdam"
+        },
+        "destinationPlace": {
+          "code": "LJU",
+          "type": "Airport",
+          "name": "Ljubljana"
+        }
+      },
+      "inboundFlight": {
+        "carrier": {
+          "Id": 1375,
+          "Code": "LO",
+          "Name": "LOT",
+          "ImageUrl": "https://s1.apideeplink.com/images/airlines/LO.png",
+          "DisplayCode": "LO"
+        },
+        "segments": [
+          {
+            "originPlace": {
+              "code": "LJU",
+              "type": "Airport",
+              "name": "Ljubljana"
+            },
+            "destinationPlace": {
+              "code": "WAW",
+              "type": "Airport",
+              "name": "Warsaw Chopin"
+            },
+            "departureDateTime": "2019-09-04T13:40:00",
+            "arrivalDateTime": "2019-09-04T15:20:00",
+            "operatingCarrier": {
+              "Id": 1375,
+              "Code": "LO",
+              "Name": "LOT",
+              "ImageUrl": "https://s1.apideeplink.com/images/airlines/LO.png",
+              "DisplayCode": "LO"
+            },
+            "duration": 100,
+            "flightNumber": "LO 616"
+          },
+          {
+            "originPlace": {
+              "code": "WAW",
+              "type": "Airport",
+              "name": "Warsaw Chopin"
+            },
+            "destinationPlace": {
+              "code": "AMS",
+              "type": "Airport",
+              "name": "Amsterdam"
+            },
+            "departureDateTime": "2019-09-04T16:45:00",
+            "arrivalDateTime": "2019-09-04T18:55:00",
+            "operatingCarrier": {
+              "Id": 1151,
+              "Code": "GW",
+              "Name": "GETJET",
+              "ImageUrl": "https://s1.apideeplink.com/images/airlines/G_.png",
+              "DisplayCode": "GW"
+            },
+            "duration": 130,
+            "flightNumber": "GW 267"
+          }
+        ],
+        "stops": [
+          {
+            "code": "WAW",
+            "type": "Airport",
+            "name": "Warsaw Chopin"
+          }
+        ],
+        "totalDuration": 315,
+        "originPlace": {
+          "code": "LJU",
+          "type": "Airport",
+          "name": "Ljubljana"
+        },
+        "destinationPlace": {
+          "code": "AMS",
+          "type": "Airport",
+          "name": "Amsterdam"
+        }
+      },
+      "price": 266.99,
+      "offerLink": "http://partners.api.skyscanner.net/apiservices/deeplink/v2?_cje=NqagL4PVt5peZGMG189S4zg4dm39CEoR%2bV8UrnEXQEuJZ36mI8cG9Fi4G8qRAMyN&url=https%3a%2f%2fwww.skyscanner.net%2ftransport_deeplink%2f4.0%2fUK%2fen-GB%2fEUR%2flota%2f2%2f9451.13589.2019-09-02%2c13589.9451.2019-09-04%2fair%2fairli%2fflights%3fitinerary%3dflight%7c-32093%7c270%7c9451%7c2019-09-02T07%3a00%7c17648%7c2019-09-02T09%3a00%7c120%7cWSAVM0%7cW%7cECONOMY+SAVER%3bflight%7c-32093%7c615%7c17648%7c2019-09-02T11%3a20%7c13589%7c2019-09-02T13%3a05%7c105%7cWSAVM0%7cW%7cECONOMY+SAVER%2cflight%7c-32093%7c616%7c13589%7c2019-09-04T13%3a40%7c17648%7c2019-09-04T15%3a20%7c100%7cWSAVM0%7cW%7cECONOMY+SAVER%3bflight%7c-32093%7c267%7c17648%7c2019-09-04T16%3a45%7c9451%7c2019-09-04T18%3a55%7c130%7cWSAVM0%7cW%7cECONOMY+SAVER%26carriers%3d-32093%26operators%3d-32093%3b-32093%2c-32093%3b-31049%26passengers%3d1%26channel%3ddataapi%26cabin_class%3deconomy%26facilitated%3dfalse%26ticket_price%3d266.99%26is_npt%3dfalse%26is_multipart%3dfalse%26client_id%3dskyscanner_b2b%26q_ids%3dlota.9451.13589.190902.190904.1..E%7c-8806257194415653388%26q_sources%3dJACQUARD%26commercial_filters%3dfalse%26q_datetime_utc%3d2019-08-31T10%3a41%3a00%26source_website_id%3damad%26pqid%3dfalse"
+    }
+  ]

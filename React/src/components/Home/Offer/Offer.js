@@ -9,7 +9,7 @@ export default props => {
         </h3>
         <div className="offers--list--item--details">
             { props.details.map(detail => (
-                <div className="offers--list--item--details--item">{detail}</div>
+                <div key={detail} className="offers--list--item--details--item">{detail}</div>
             )) }
         </div>
         <div style={{ backgroundImage: `linear-gradient(to right bottom, rgba(${props.colorLight}, .7), rgba(${props.colorDark}, .8))` }} className="offers--list--item--price">

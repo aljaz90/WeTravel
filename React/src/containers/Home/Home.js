@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkedAlt, faPlaneDeparture, faBoxOpen, faHome, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkedAlt, faPlaneDeparture, faBoxOpen, faHome } from '@fortawesome/free-solid-svg-icons';
+import { HashLink } from 'react-router-hash-link';
 import Offer from '../../components/Home/Offer/Offer';
+import Form from '../../components/Form/Form';
 
-export default class Home extends Component {
+class Home extends Component {
 
   constructor(props) {
     super(props);
@@ -50,7 +52,7 @@ export default class Home extends Component {
           details: [
             "6 days trip",
             "Cosy hotels",
-            "Try the Swiss chocholate",
+            "Taste Switzerland",
             "The heart of Europe!"
           ],
           image: "switzerland.jpg"
@@ -68,22 +70,96 @@ export default class Home extends Component {
         } else {
           this.setState({...this.state, headerImg: this.state.headerImg+1});
         }
-      }, 8000)
+      }, 8000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.headerImgInterval);
   }
 
   handleSelectPlace(event) {
-    console.log(event.target.innerText.toLowerCase());
-    this.setState({...this.state, selectedPlace: event.target.innerText.toLowerCase()})
+    //console.log(event.target.innerText.toLowerCase());
+    this.setState({...this.state, selectedPlace: event.target.innerText.toLowerCase()});
+  }
+
+  handleCreateTrip = (values, event) => {
+    event.preventDefault();
+
+    this.props.history.push({
+      pathname: '/trip',
+      state: {
+        ...values,
+        ok: true
+      }
+    })
+  }
+
+  formatMonth = month => {
+    //console.log(month)
+    month = month + "";
+    if (month.length > 1) {
+      return month;
+    }
+    return "0"+month;
+  }
+
+  formatDate = date => {
+    return date.getFullYear() + "-" + this.formatMonth(date.getMonth()+1) + "-" + this.formatMonth(date.getDate());
   }
 
   render() {
+
+    const destinationAirportsData = [
+      {name: "Everywhere", data: "everywhere"},
+      {name: "Ljubljana", data: "LJU"},
+      {name: "San Francisco", data: "SFO"},
+      {name: "Amsterdam", data: "AMS"},
+      {name: "Tokyo", data: ""},
+      {name: "Hong Kong", data: ""},
+      {name: "Venice", data: ""}
+    ];
+    
+    const sourceAirportsData = [
+      {name: "Ljubljana", data: "LJU"},
+      {name: "San Francisco", data: "SFO"},
+      {name: "Amsterdam", data: "AMS"},
+      {name: "Tokyo", data: ""},
+      {name: "Venice", data: ""},
+      {name: "Hong Kong", data: ""}
+    ];
+
+    const hotelQualityData = [
+      {name: "Budget", data: "budget"},
+      {name: "Normal", data: "normal"},
+      {name: "Luxury", data: "luxury"}
+    ];
+
+    const cabinClassData = [
+      {name: "Economy", data: "economy"},
+      {name: "Premium Economy", data: "premiumeconomy"},
+      {name: "Business", data: "business"},
+      {name: "First", data: "first"}
+    ];
+
+    let todayDate = new Date();
+    const createTripFormInputs = [
+      {name: 'from', validation: {reqired: true}, data: sourceAirportsData, type: 'autosuggest'},
+      {name: 'to', validation: {reqired: true}, data: destinationAirportsData, type: 'autosuggest'},
+      {name: 'departing', data: {}, validation: {reqired: true, min: this.formatDate(todayDate), max: this.formatDate(new Date(todayDate.getFullYear()+1, todayDate.getMonth(), todayDate.getDate()))}, type: 'date'},
+      {name: 'arriving', data: {}, validation: {reqired: true, min: this.formatDate(todayDate), max: this.formatDate(new Date(todayDate.getFullYear()+1, todayDate.getMonth(), todayDate.getDate()))}, type: 'date'},
+      {name: 'minimum_hotel_quallity', validation: {reqired: true}, data: hotelQualityData, type: 'autosuggest'},
+      {name: 'plane_cabin_class', validation: {reqired: true}, data: cabinClassData, type: 'autosuggest'},
+      {name: 'budget', data: {}, validation: {reqired: true, min: 100, max: 1000000, step: 100}, type: 'number'},
+      {name: 'travelers', data: {}, validation: {reqired: true, min: 1, max: 16, step: 1}, type: 'number'}
+    ];
+
     return (
-      <React.Fragment>
-        <section className="header">
+      <div className="content content--home">
+        <section id="top" className="header">
           <div className="header--welcome">
               <h1 className="header--welcome--heading">We Travel</h1>
               <p className="header--welcome--quote">Find a perfect trip for you.</p>
-              <Link to="/" className="header--welcome--btn btn btn--important">Create a trip</Link>
+              <HashLink scroll={el => {el.scrollIntoView({ behavior: 'smooth', block: 'end' });}} smooth to="/#createatrip" className="header--welcome--btn btn btn--important">Create a trip</HashLink>
           </div>
           <div className="header--arrow">
             &darr;
@@ -116,7 +192,7 @@ export default class Home extends Component {
               </p>
             </div>
             <div className="whatwedo--item">
-              <FontAwesomeIcon className="whatwedo--item--icon" icon="box-open" />
+              <FontAwesomeIcon className="whatwedo--item--icon" icon={faBoxOpen} />
               <h3 className="whatwedo--item--heading heading-3">
                 The full Package
               </h3>
@@ -125,7 +201,7 @@ export default class Home extends Component {
               </p>
             </div>
             <div className="whatwedo--item">
-              <FontAwesomeIcon className="whatwedo--item--icon" icon="home" />
+              <FontAwesomeIcon className="whatwedo--item--icon" icon={faHome} />
               <h3 className="whatwedo--item--heading heading-3">
                 Book with us from Home
               </h3>
@@ -135,7 +211,7 @@ export default class Home extends Component {
             </div>
           </div>
         </section>
-        <section className="offers">
+        <section id="offers" className="offers">
           <h1 className="offers--heading heading-1">Offers</h1>
           <div className="offers--places">
             <div onClick={this.handleSelectPlace} className={"offers--places--place" + (this.state.selectedPlace==="americas" ? " offers--places--place--selected" : "")} >
@@ -162,47 +238,24 @@ export default class Home extends Component {
               if (this.state.selectedPlace === "everywhere" || this.state.selectedPlace === offer.place) {
                 return offer;
               }
+              return null;
             }).map(offer => (
-              <Offer colorDark={offer.colorDark} colorLight={offer.colorLight} price={offer.price} details={offer.details} name={offer.name} image={offer.image} />
+              <Offer key={offer.name} colorDark={offer.colorDark} colorLight={offer.colorLight} price={offer.price} details={offer.details} name={offer.name} image={offer.image} />
             )) }
           </div>
         </section>
-        <section className="createatrip">
+        <section id="createatrip" className="createatrip">
           <h1 className="createatrip--heading heading-1">Create a trip</h1>
-          <form className="createatrip--form">
-              <div className="createatrip--form--input-group">
-                <input className="createatrip--form--input-group--input" />
-                <label className="createatrip--form--input-group--label">Label</label>
-              </div>
-              <div className="createatrip--form--input-group">
-                <input className="createatrip--form--input-group--input" />
-                <label className="createatrip--form--input-group--label">Label</label>
-              </div>
-              <div className="createatrip--form--input-group">
-                <input className="createatrip--form--input-group--input" />
-                <label className="createatrip--form--input-group--label">Label</label>
-              </div>
-              <div className="createatrip--form--input-group">
-                <input className="createatrip--form--input-group--input" />
-                <label className="createatrip--form--input-group--label">Label</label>
-              </div>
-              <div className="createatrip--form--input-group">
-                <input className="createatrip--form--input-group--input" />
-                <label className="createatrip--form--input-group--label">Label</label>
-              </div>
-              <div className="createatrip--form--input-group">
-                <input className="createatrip--form--input-group--input" />
-                <label className="createatrip--form--input-group--label">Label</label>
-              </div>
-              <input value="Create a Trip" className="createatrip--form--input-group--submit btn btn--important" type="submit" />
-          </form>        
+          <Form inputs={createTripFormInputs} onSubmit={this.handleCreateTrip} />
         </section>
         <section className="footer">
           <p className="footer--text">
             WeTravel &copy; Created by <Link to="#" className="link">Aljaz Kern</Link> in 2019.
           </p>
         </section>
-      </React.Fragment>
+      </div>
     )
   }
 }
+
+export default Home;

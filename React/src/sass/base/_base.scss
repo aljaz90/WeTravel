@@ -20,8 +20,15 @@ body {
 .content {
     margin-top: 6.36rem;
     display: grid;
-    grid-template-rows: calc(100vh - 6.36rem) min-content minmax(calc(100vh - 6.36rem), min-content) repeat(2, min-content);
     grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+    &--home {
+        grid-template-rows: calc(100vh - 6.36rem) min-content minmax(calc(100vh - 6.36rem), min-content) repeat(2, min-content);
+    }
+
+    &--trip {
+        grid-template-rows: min-content min-content;
+        background-color: $color-white-2;
+    }
 }
 
 ::selection {

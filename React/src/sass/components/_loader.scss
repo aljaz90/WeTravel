@@ -1,0 +1,140 @@
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient(to right bottom, rgba($color-secondary-light, 0.9), rgba($color-secondary-dark, 1));
+    z-index: 10000;
+
+    &--background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        background-color: $color-white;
+    }
+
+    &--icon {
+        position: absolute;
+        bottom: 5rem;
+        left: 5rem;
+        color: $color-white;
+        font-size: 6rem;
+        animation: animatePlane 35s infinite;
+        z-index: 10002;
+    }
+
+    &--text {
+        color: $color-white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        text-align: center;
+        font-family: $font-heading;
+        font-size: 3rem; 
+        user-select: none;
+        z-index: 10001;
+
+        &--loading {
+            font-weight: 400;
+        }
+
+        &--game {
+
+        }
+
+        &--score {
+
+        }
+    }
+}
+
+@keyframes animatePlane {
+    0% {
+        transform: translate(0,0) rotateZ(-90deg); 
+    }
+
+    10% {
+        transform: translate(0, -80vh) rotateZ(-90deg); 
+    }
+
+    11% {
+        transform: translate(0, -80vh) rotateZ(30deg); 
+    }
+
+    20% {
+        transform: translate(90vw, 0) rotateZ(30deg); 
+    }
+
+    21% {
+        transform: translate(90vw, 0) rotateZ(-150deg); 
+    }
+
+    30% {
+        transform: translate(50vw, -40vh) rotateZ(-150deg);
+    }
+
+    31% {
+        transform: translate(50vw, -40vh) rotateZ(-30deg);
+    }
+
+    40% {
+        transform: translate(80vw, -70vh) rotateZ(-30deg);
+    }
+
+    41% {
+        transform: translate(80vw, -70vh) rotateZ(160deg);
+    }
+
+    50% {
+        transform: translate(0, -20vh) rotateZ(160deg);
+    }
+
+    51% {
+        transform: translate(0, -20vh) rotateZ(-35deg);
+    }
+
+    60% {
+        transform: translate(60vw, -70vh) rotateZ(-35deg);
+    }
+    
+    61% {
+        transform: translate(60vw, -70vh) rotateZ(115deg);
+    }
+
+    70% {
+        transform: translate(40vw, -10vh) rotateZ(115deg); 
+    }
+
+    71% {
+        transform: translate(40vw, -10vh) rotateZ(-25deg); 
+    }
+
+    80% {
+        transform: translate(70vw, -20vh) rotateZ(-25deg); 
+    }
+
+    81% {
+        transform: translate(70vw, -20vh) rotateZ(-160deg); 
+    }
+
+    90% {
+        transform: translate(20vw, -45vh) rotateZ(-160deg); 
+    }
+
+    91% {
+        transform: translate(20vw, -45vh) rotateZ(120deg);
+    }
+
+    99% {
+        transform: translate(0,0) rotateZ(120deg);
+    }
+
+    100% {
+        transform: translate(0,0) rotateZ(-90deg); 
+    }
+}
