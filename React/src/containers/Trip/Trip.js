@@ -258,7 +258,7 @@ export default class Trip extends Component {
                         <div className="content content--trip">
                             <section className="flights">
                                 {
-                                    this.state.offers.map(offer => <Flight key={offer.offerLink} flight={offer} />)
+                                    this.state.offers.map((offer, index) => <Flight key={index} id={index} flight={offer} />)
                                 }
                             </section>
                         </div>

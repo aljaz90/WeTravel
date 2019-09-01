@@ -642,18 +642,46 @@ body {
       align-items: stretch; }
       .flights--item--outbound--carrier-image, .flights--item--inbound--carrier-image {
         height: 8rem;
-        background-repeat: no-repeat; }
+        background-repeat: no-repeat;
+        margin-top: 2rem; }
+      .flights--item--outbound--title, .flights--item--inbound--title {
+        font-size: 2.2rem;
+        font-family: "Raleway", sans-serif;
+        font-weight: 400;
+        background-clip: text;
+        color: transparent; }
+      .flights--item--outbound--operated-by, .flights--item--inbound--operated-by {
+        font-size: 1.6rem;
+        font-weight: 400;
+        color: #777; }
+      .flights--item--outbound--stops, .flights--item--inbound--stops {
+        font-size: 1.6rem;
+        font-weight: 400;
+        color: #777; }
+      .flights--item--outbound--duration, .flights--item--inbound--duration {
+        font-size: 1.6rem;
+        font-weight: 400;
+        color: #777; }
     .flights--item--details {
       display: flex;
       flex-direction: column;
       justify-content: center;
       text-align: center;
       background-image: linear-gradient(to right bottom, #ff7b62, #fb2800);
-      padding: 2rem 3rem; }
+      padding: 2rem 3rem;
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%); }
       .flights--item--details--price {
         font-size: 3.2rem;
         color: #fff;
-        font-weight: 100;
+        font-weight: 400;
         font-family: "Raleway", sans-serif; }
+      .flights--item--details--book {
+        /*background-color: $color-white !important;
+                color: $color-secondary !important; */
+        border: 5px solid #fff;
+        background-color: transparent !important; }
+        .flights--item--details--book:hover {
+          background-color: #fff !important;
+          color: #777; }
       .flights--item--details--price + .flights--item--details--book {
         margin-top: 2rem; }
