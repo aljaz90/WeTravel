@@ -12,13 +12,19 @@
         flex-direction: row;
         justify-content: space-between;
         background-color: $color-white;
-        height: 26rem;
+        min-height: 26rem;
         box-shadow: 0 1.5rem 4rem rgba(0,0,0,0.15);
         transition: all .4s;
         cursor: pointer;
         border-radius: 4px;
         overflow: hidden;
         padding-left: 3rem;
+
+        &--open {
+            height: unset;
+            z-index: 12;
+            margin: 3rem 0; 
+        } 
 
         &:hover {
             box-shadow: 0 1.5rem 2rem rgba(0,0,0,0.15);
@@ -29,11 +35,49 @@
             display: flex;
             flex-direction: column;
             align-items: stretch;
+            padding: 2rem 0;
+
+            &--segment {
+                padding: 1rem .5rem;
+                color: $color-grey-2;
+                
+                &--title {
+                    font-size: 2rem;
+                    font-weight: 700;
+                    color: transparent;
+                    background-clip: text; 
+                }
+
+                &--time {
+                    font-size: 1.6rem;
+                    font-weight: 300;
+                }
+
+                &--flight-number {
+                    font-size: 1.6rem;
+                    font-weight: 100;
+                }
+
+                &--carrier {
+                    font-size: 1.6rem;
+                    font-weight: 600;
+                }
+
+            }
 
             &--carrier-image {
                 height: 8rem;
                 background-repeat: no-repeat;
-                margin-top: 2rem;
+            }
+
+            &--direction {
+                font-size: 1.6rem;
+                font-weight: 100;
+                color: $color-grey-2;
+
+                &--icon {
+                    font-size: 1.6rem;
+                }
             }
     
             &--title {
@@ -59,7 +103,9 @@
             &--duration {
                 font-size: 1.6rem;
                 font-weight: 400;
-                color: $color-grey-2;  
+                color: $color-grey-2;
+                position: relative;
+                margin-bottom: 3rem; 
             }
         }
 
@@ -71,6 +117,17 @@
             background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
             padding: 2rem 3rem;
             clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%);
+
+            &--open {
+                clip-path: none;
+            }
+
+            &--class {
+                font-size: 2.3rem;
+                color: $color-white;
+                font-weight: 100;
+                font-family: $font-heading;
+            }
 
             &--price {
                 font-size: 3.2rem;

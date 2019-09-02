@@ -12,7 +12,8 @@ export default class Trip extends Component {
         this.state = {
             loading: true,
             offers: [],
-            responseData: {}
+            responseData: {},
+            selectedOffer: null
         };
     }
 
@@ -248,6 +249,22 @@ export default class Trip extends Component {
         });
     }
 
+    handleOnClickOffer = index => {
+        console.log("CLICKED " + index);
+        if (index === this.state.selectedOffer) {
+            this.setState({
+                ...this.state,
+                selectedOffer: null
+            });
+        }
+        else {
+            this.setState({
+                ...this.state,
+                selectedOffer: index
+            });
+        }
+    }
+
     render() {
         if (this.props.location.state && this.props.location.state.ok) {
             if (this.state.loading) {
@@ -258,7 +275,7 @@ export default class Trip extends Component {
                         <div className="content content--trip">
                             <section className="flights">
                                 {
-                                    this.state.offers.map((offer, index) => <Flight key={index} id={index} flight={offer} />)
+                                    this.state.offers.map((offer, index) => <Flight open={this.state.selectedOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} key={index} id={index} flight={offer} />)
                                 }
                             </section>
                         </div>

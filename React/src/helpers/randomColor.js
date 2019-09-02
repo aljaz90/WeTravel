@@ -18,7 +18,7 @@ export default hexFormat => {
         {colorLight: '#00b09b', colorDark: '#96c93d', additionalColors: []},
         {colorLight: '#00F260', colorDark: '#0575E6', additionalColors: []},
         {colorLight: '#fc4a1a', colorDark: '#f7b733', additionalColors: []},
-        {colorLight: '#03001e', colorDark: '#fdeff9', additionalColors: ["#7303c0", "#ec38bc"]},
+        {colorLight: '#fdeff9', colorDark: '#03001e', additionalColors: ["#ec38bc", "#7303c0"]},
         {colorLight: '#667db6', colorDark: '#667db6', additionalColors: ["#ec38bc", "#ec38bc"]},
         {colorLight: '#1a2a6c', colorDark: '#fdbb2d', additionalColors: ["#b21f1f"]},
         {colorLight: '#22c1c3', colorDark: '#fdbb2d', additionalColors: []},
