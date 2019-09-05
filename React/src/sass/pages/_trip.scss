@@ -40,6 +40,11 @@
             &--segment {
                 padding: 1rem .5rem;
                 color: $color-grey-2;
+                visibility: collapse;
+
+                &--open {
+                    visibility: visible;    
+                }
                 
                 &--title {
                     font-size: 2rem;

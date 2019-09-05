@@ -80,19 +80,19 @@ export default props => {
                 <div className="flights--item--outbound--duration">
                     { "Travel time: " + (props.flight.outboundFlight.totalDuration / 60).toFixed(2) } h
                 </div>
-                { props.open ? 
+                {  
                     props.flight.outboundFlight.segments.map(segment => {
                         let departureTime = new Date(segment.departureDateTime);
                         let arrivalTime = new Date(segment.arrivalDateTime);
 
                         return (
-                        <div className="flights--item--outbound--segment">
+                        <div key={segment.flightNumber} className={"flights--item--outbound--segment" + (props.open ? " flights--item--outbound--segment--open" : "")}>
                             <div style={{backgroundImage: color}} className="flights--item--outbound--segment--title">{segment.originPlace.code + " - " + segment.destinationPlace.code}</div>
                             <div className="flights--item--outbound--segment--time">{formatTime(departureTime.getHours()) + ":" + formatTime(departureTime.getMinutes())  + " - " + formatTime(arrivalTime.getHours()) + ":" + formatTime(arrivalTime.getMinutes())}</div>
                             <div className="flights--item--outbound--segment--flight-number">{segment.flightNumber}</div>
                             <div className="flights--item--outbound--segment--carrier">{segment.operatingCarrier.Name}</div>
                         </div>  );
-                    }) : ""
+                    })
                 }
             </div>
             <div className="flights--item--inbound">
@@ -113,19 +113,19 @@ export default props => {
                 <div className="flights--item--inbound--duration">
                     { "Travel time: " + (props.flight.inboundFlight.totalDuration / 60).toFixed(2) } h
                 </div>
-                { props.open ? 
+                { 
                     props.flight.inboundFlight.segments.map(segment => {
                         let departureTime = new Date(segment.departureDateTime);
                         let arrivalTime = new Date(segment.arrivalDateTime);
 
                         return (
-                        <div className="flights--item--inbound--segment">
+                        <div className={"flights--item--inbound--segment" + (props.open ? " flights--item--outbound--segment--open" : "")}>
                             <div style={{backgroundImage: color}} className="flights--item--inbound--segment--title">{segment.originPlace.code + " - " + segment.destinationPlace.code}</div>
                             <div className="flights--item--inbound--segment--time">{formatTime(departureTime.getHours()) + ":" + formatTime(departureTime.getMinutes())  + " - " + formatTime(arrivalTime.getHours()) + ":" + formatTime(arrivalTime.getMinutes())}</div>
                             <div className="flights--item--inbound--segment--flight-number">{segment.flightNumber}</div>
                             <div className="flights--item--inbound--segment--carrier">{segment.operatingCarrier.Name}</div>
                         </div>  );
-                    }) : ""
+                    }) 
                 }
             </div>
             <div className={"flights--item--details" + (props.open ? " flights--item--details--open" : "")} style={{backgroundImage: color}}>

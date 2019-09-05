@@ -92,6 +92,22 @@ body {
   align-items: center; }
   .form--input-group {
     position: relative; }
+    .form--input-group--home {
+      display: flex;
+      flex-direction: row;
+      width: 100%; }
+    .form--input-group--inline--1 {
+      margin-right: 2rem; }
+    .form--input-group--inline--2 .form--input-group--label {
+      transform: translate(16rem, -2.2rem);
+      left: unset;
+      right: 0; }
+    .form--input-group--inline--budget {
+      width: 50%; }
+      .form--input-group--inline--budget .form--input-group--label--budget-currency, .form--input-group--inline--budget .form--input-group--input--budget {
+        transform: translate(0, 0); }
+      .form--input-group--inline--budget .form--input-group--label--budget-label {
+        transform: translate(-20rem, -2.2rem); }
     .form--input-group--label {
       position: absolute;
       left: 0;
@@ -582,7 +598,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 8rem; }
+  padding: 8rem 0;
+  padding-bottom: 16rem; }
   .createatrip--form {
     display: flex;
     flex-direction: column;
@@ -647,7 +664,10 @@ body {
       padding: 2rem 0; }
       .flights--item--outbound--segment, .flights--item--inbound--segment {
         padding: 1rem .5rem;
-        color: #777; }
+        color: #777;
+        visibility: collapse; }
+        .flights--item--outbound--segment--open, .flights--item--inbound--segment--open {
+          visibility: visible; }
         .flights--item--outbound--segment--title, .flights--item--inbound--segment--title {
           font-size: 2rem;
           font-weight: 700;

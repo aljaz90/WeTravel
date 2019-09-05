@@ -84,6 +84,12 @@ class Home extends Component {
 
   handleCreateTrip = (values, event) => {
     event.preventDefault();
+    let departing = new Date(values.departing);
+    let arriving = new Date(values.arriving);
+    console.log(values)
+    if (!(departing < arriving) || values.from === values.to) {
+      return;
+    }
 
     this.props.history.push({
       pathname: '/trip',
@@ -246,7 +252,7 @@ class Home extends Component {
         </section>
         <section id="createatrip" className="createatrip">
           <h1 className="createatrip--heading heading-1">Create a trip</h1>
-          <Form inputs={createTripFormInputs} onSubmit={this.handleCreateTrip} />
+          <Form place="home" inputs={createTripFormInputs} onSubmit={this.handleCreateTrip} />
         </section>
         <section className="footer">
           <p className="footer--text">
