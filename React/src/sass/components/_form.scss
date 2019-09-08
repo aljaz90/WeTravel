@@ -17,6 +17,169 @@
         }
 
         &--inline {
+            
+            &--1 {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                margin-right: 0rem;
+            }
+
+            &--2 {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                .form--input-group--label {
+                    transform: translate(16rem, -2.2rem); 
+                    left: unset; 
+                    right: 0;
+                }
+            }
+
+            &--budget {
+                width: 50%; 
+
+                /*.form--input-group--label--budget-currency, .form--input-group--input--budget {
+                    transform: translate(0,0);
+                }*/
+                .form--input-group--label--budget-label {
+                    transform: translate(-20rem, -2.2rem);
+                }
+            }
+        }
+
+        &--label {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translate(-20rem, -2.2rem); 
+            font-size: 1.6rem;
+            font-weight: 100;
+            transition: all .4s ease-in-out;
+
+            &--date {
+                //transform: translate(-27rem, -2.2rem); 
+            }
+
+            &--budget-label {
+                transform: translate(-22.5rem, -2.2rem);  
+            }
+            &--budget-currency {
+                left: unset;
+                right: 0;
+                top: 0;
+                transform: translate(50%, 0);
+                background-image: linear-gradient(to right, rgba($color-secondary-light, 0.9), rgba($color-secondary-dark, 1));
+                color: $color-white;
+                font-size: 2rem;
+                padding: 1rem 2rem;
+                font-weight: 400;
+                border-top-right-radius: 2px; 
+                border-bottom-right-radius: 2px;
+                user-select: none;
+                transform: translateX(17.5rem); 
+                height: 100%;
+            }
+        }
+
+        &--input {
+            font-size: 2.6rem;
+            font-family: $font-primary; 
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 2px;
+            width: 35rem;
+            
+            &--date {
+                
+            }
+            &--number {
+                
+            }
+            &--budget {
+                width: 29rem; 
+                transform: translateX(-2rem);  
+                
+                &:not(:last-child) {
+                    margin-right: 2rem;
+                }
+            }
+
+        }
+
+        &:not(:last-child) {
+            margin-right: 2rem;
+        } 
+
+    }
+
+    &--submit {
+
+    }
+}
+
+.form-home {
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(105deg, rgba($color-grey-3,0.95) 0%, rgba($color-grey-3,0.95) 60%, transparent 60%),url(/img/yosemite.jpg);;
+    background-size: cover;
+    width: 80vw;
+    height: 50rem;
+    position: relative;
+    border-radius: 4px;
+
+    &--container {
+        width: 60%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 2rem; 
+    }
+
+    &--home {
+        
+    } 
+
+    &--input-group {
+        position: relative;
+
+        &--home {
+            display: flex;
+            flex-direction: row;
+
+            position: relative;
+
+            &--icon {
+                color: $color-primary;
+                position: absolute;
+                bottom: 0;
+                font-size: 4rem;
+                transition: all .2s;
+
+                &--1 {
+                    left: 0;
+                    transform: translate(-7rem, 50%);
+
+                    &:hover {
+                        transform: translate(-7rem, 50%) scale(1.3);
+                    }
+                }
+
+                &--2 {
+                    right: 0;
+                    transform: translate(7rem, 50%);
+
+                    &:hover {
+                        transform: translate(7rem, 50%) scale(1.3);
+                    }
+                }
+            }
+        }
+
+        &--inline {
 
             &--1 {
                 margin-right: 2rem;
@@ -79,7 +242,7 @@
             font-family: $font-primary; 
             padding: 1rem 2rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 2px;
             width: 35rem;
             
             &--date {
@@ -114,7 +277,7 @@
     font-family: $font-primary; 
     padding: 1rem 2rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 2px;
     width: 35rem;
 }
 
