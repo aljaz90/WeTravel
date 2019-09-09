@@ -1,0 +1,118 @@
+{
+  "is_genius_deal": 0,
+  "cc_required": 1,
+  "breakfast_review_score": {
+    "review_score_word": "Disappointing",
+    "rating": 4.7,
+    "review_count": 52
+  },
+  "business_review_nr": 56,
+  "latitude": 35.6668551826444,
+  "district": "Ichikawa, Gyotoku",
+  "urgency_c": [
+    0
+  ],
+  "accommodation_type": 231,
+  "hotel_name_trans": "CVS Bay Hotel",
+  "cleanliness_score": 7.4,
+  "deals": {
+    "deals_available": {
+      "has_flash_deal": 1
+    },
+    "dotd_expires_at": 1568127600,
+    "deal_attributes": {},
+    "deal_events_killswitch": 0
+  },
+  "city_in_trans": "in Tokyo",
+  "is_mobile_deal": 0,
+  "is_city_center": 0,
+  "default_language": "ja",
+  "review_score": 7.5,
+  "review_recommendation": "",
+  "is_free_cancellable": 1,
+  "is_wholesaler_candidate": 1,
+  "class": 2,
+  "genius_discount_percentage": 0,
+  "block_ids": [
+    "261596509_152870509_1_1_0"
+  ],
+  "cc1": "jp",
+  "cleanliness_score_reviews_nr": 213,
+  "districts": "17305",
+  "bwallet": {
+    "hotel_eligibility": 1
+  },
+  "booking_home": {
+    "segment": 0,
+    "group": "hotels_and_others",
+    "is_single_unit_property": 0,
+    "is_booking_home": ""
+  },
+  "distance_to_cc": "17.75",
+  "min_total_price": 41056,
+  "business_review_score": 7.1,
+  "class_is_estimated": 0,
+  "review_score_word": "Good",
+  "city_trans": "Tokyo",
+  "url": "https://www.booking.com/hotel/jp/cvsbay.html",
+  "accommodation_type_name": "Economy hotels",
+  "available_rooms": 1,
+  "review_nr": 213,
+  "main_photo_id": 109727763,
+  "is_smart_deal": 0,
+  "price_is_final": 1,
+  "hotel_include_breakfast": 1,
+  "main_photo_url": "http://r-ec.bstatic.com/xdata/images/hotel/square60/109727763.jpg?k=388b387c8e43a71a41b7a0e86e03dbfad64cd472c0c315ee163e0b3d6cfee53c&o=",
+  "longitude": 139.924058623943,
+  "mobile_discount_percentage": 10,
+  "timezone": "Asia/Tokyo",
+  "facilities_review_score": {
+    "review_count": 213,
+    "rating": 7.1,
+    "rating_message": "Good"
+  },
+  "checkout": {
+    "until": "10:00",
+    "from": ""
+  },
+  "location_score_reviews_nr": 212,
+  "hotel_name": "CVS Bay Hotel",
+  "zip": "272-0127",
+  "ufi": -246227,
+  "currencycode": "JPY",
+  "city_name_en": "Ichikawa",
+  "hotel_id": 2615965,
+  "address_trans": "Shiohama 2-3-10",
+  "checkin": {
+    "until": "00:00",
+    "from": "15:00"
+  },
+  "currency_code": "JPY",
+  "hotel_facilities": "424,134,96,421,135,305,91,425,80,3,158,47,143,172,420,109,422,107,13,8,163,48,16,423,418,171,110",
+  "countrycode": "jp",
+  "selected_review_topic": null,
+  "district_id": 17305,
+  "location_score": 7.4,
+  "preferred": 1,
+  "is_no_prepayment_block": 1,
+  "cleanliness_score_word": "Good",
+  "location_score_word": "Good",
+  "distance": "17.70",
+  "country_trans": "Japan",
+  "extended": 0,
+  "address": "Shiohama 2-3-10",
+  "urgency_room_c": 1,
+  "city": "Ichikawa",
+  "soldout": 0,
+  "price_breakdown": {
+    "sum_excluded_raw": "0.00",
+    "currency": "JPY",
+    "all_inclusive_price": 41056,
+    "has_fine_print_charges": 0,
+    "gross_price": "41056.00",
+    "has_incalculable_charges": 1,
+    "has_tax_exceptions": 0
+  },
+  "in_best_district": 0,
+  "business_review_score_word": "Good"
+}

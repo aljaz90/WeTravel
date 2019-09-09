@@ -5,6 +5,7 @@ import { faMapMarkedAlt, faPlaneDeparture, faBoxOpen, faHome } from '@fortawesom
 import { HashLink } from 'react-router-hash-link';
 import Offer from '../../components/Home/Offer/Offer';
 import Form from '../../components/Form/Form';
+import BookingAPI from '../../components/BookingAPI/BookingAPI';
 
 class Home extends Component {
 
@@ -259,6 +260,7 @@ class Home extends Component {
             WeTravel &copy; Created by <Link to="#" className="link">Aljaz Kern</Link> in 2019.
           </p>
         </section>
+        <BookingAPI />
       </div>
     )
   }
