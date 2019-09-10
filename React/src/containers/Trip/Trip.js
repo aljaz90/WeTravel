@@ -12,10 +12,21 @@ export default class Trip extends Component {
         this.state = {
             loading: true,
             offers: [],
+            hotels: [],
             responseData: {},
-            selectedOffer: null
+            openOffer: null,
+            openHotel: null,
+            selectedOffer: null,
+            selectedHotel: null,
+            isShowingFlights: true,
+            requests: {
+                flight: false,
+                hotels: false
+            }
         };
     }
+
+    // FLIGHT SEARCH
 
     getAirports = (from, to, resolve) => {
         let config = {
@@ -81,13 +92,6 @@ export default class Trip extends Component {
         })
         .catch(err => {
             console.log(err);
-            /*this.props.history.push({
-                pathname: '/',
-                state: {
-                  info: "Error creating Trip",
-                  ok: false
-                }
-              });*/
         });
     }
 
@@ -134,8 +138,8 @@ export default class Trip extends Component {
             offers.push(offer);
         });
         offers = offers.sort((a, b) => a.price - b.price);
-        console.log(offers)
-        this.setState({...this.state, offers, loading: false})
+        this.setState({...this.state, offers})
+        this.completed("flights");
     }
 
     getFlight = legId => {
@@ -234,8 +238,176 @@ export default class Trip extends Component {
         return cheapestOffer;
     }
 
+    // HOTEL SEARCH
+
+    searchHotels = data => {
+        let config = {
+            headers: {
+                "x-rapidapi-host": "apidojo-booking-v1.p.rapidapi.com",
+	            "x-rapidapi-key": "d9db34e064mshd0d8e9d32b2f42ep11fd0djsn59a7fc17ba87"
+            },
+            params: {
+                "languagecode": "en-us",
+	            "text": data.destination
+            }
+        };
+
+        axios.get("https://cors-anywhere.herokuapp.com/https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete", config)
+        .then(res => {
+            if (res.status === 200) {
+                console.log("BOOKING API - AOK")
+                data.destination = res.data[0].dest_id;
+                let config = {
+                    headers: {
+                        "x-rapidapi-host": "apidojo-booking-v1.p.rapidapi.com",
+                        "x-rapidapi-key": "d9db34e064mshd0d8e9d32b2f42ep11fd0djsn59a7fc17ba87"
+                    },
+                    params: {
+                        "price_filter_currencycode": "USD",
+                        "travel_purpose": "leisure",
+                        "categories_filter": "price::9-40,free_cancellation::1,class::1,class::0,class::2",
+                        "search_id": "none",
+                        "order_by": "popularity",
+                        "children_qty": "0",
+                        "languagecode": "en-us",
+                        "children_age": "",
+                        "search_type": "city",
+                        "offset": "0",
+                        "dest_ids": data.destination,
+                        "guest_qty": data.travelers,
+                        "arrival_date": data.arrival_date,
+                        "departure_date": data.departure_date,
+                        "room_qty": "1"
+                    }
+                };
+                
+                axios.get("https://cors-anywhere.herokuapp.com/https://apidojo-booking-v1.p.rapidapi.com/properties/list", config)
+                .then(res => {
+                    console.log(res)
+                    if (res.status === 200) {
+                        this.parseHotels(res.data.result);
+                    } else {
+                        console.log("BOOKING API ERROR")
+                    }
+                })
+                .catch(err => {
+                    console.log("BOOKING API ERROR")
+                    console.log(err);
+                });
+            }
+        })
+        .catch(err => {
+            console.log("BOOKING API ERROR")
+            console.log(err);
+        });
+    }
+
+    parseHotels = data => {
+        let hotels = [];
+        data.forEach(hotel => {
+            if (!hotel.soldout) {
+                hotels.push({
+                    name: hotel.hotel_name,
+                    is_city_center: hotel.is_city_center,
+                    distance_to_cc: hotel.distance_to_cc,
+                    url: hotel.url,
+                    breakfast_included: hotel.hotel_include_breakfast,
+                    address: hotel.address,
+                    city: hotel.city,
+                    country: hotel.country_trans,
+                    image_url: hotel.main_photo_url,
+                    price: {
+                        currency: hotel.currencycode,
+                        all_inclusive_price: hotel.price_breakdown.all_inclusive_price,
+                        min_total_price: hotel.min_total_price,
+                        price: this.convertPriceTo(hotel.min_total_price, hotel.currencycode)
+                    },
+                    ratings: {
+                        total: hotel.review_score,
+                        breakfast: hotel.breakfast_review_score.rating,
+                        cleanliness: hotel.cleanliness_score
+                    }
+                });
+            }
+        });
+
+        this.setState({
+            ...this.state,
+            hotels
+        });
+        this.completed("hotels");
+        console.log("Hotels")
+        console.log(hotels)
+    }
+
+    // OTHER
+
+    completed = action => {
+        if (action === "flights" && this.state.requests.hotels) {
+            this.setState({
+                ...this.state,
+                loading: false,
+                requests: {
+                    ...this.state.requests,
+                    flights: true
+                }
+            });
+            console.log("DONE 1");
+        }
+        else if (action === "hotels" && this.state.requests.flights) {
+            this.setState({
+                ...this.state,
+                loading: false,
+                requests: {
+                    ...this.state.requests,
+                    hotels: true
+                }
+            });
+            console.log("DONE 2");
+        }
+        else {
+            this.setState({
+                ...this.state,
+                requests: {
+                    ...this.state.requests,
+                    [action]: true
+                }
+            });
+            console.log("DONE 1/2");
+        }
+    }
+ 
+    convertPriceTo = (price, from, to="EUR") => {
+        let body = {
+            "from-type": from,
+            "to-type": to,
+            "from-value": price
+        };
+
+        let config = {
+            headers: {
+                "x-rapidapi-host": "community-neutrino-currency-conversion.p.rapidapi.com",
+                "x-rapidapi-key": "d9db34e064mshd0d8e9d32b2f42ep11fd0djsn59a7fc17ba87",
+                "content-type": "application/x-www-form-urlencoded"
+            }
+        };
+
+        axios.post("https://cors-anywhere.herokuapp.com/https://community-neutrino-currency-conversion.p.rapidapi.com/convert", querystring.stringify(body), config)
+        .then(res => {
+            if (res.status === 200) {
+                let num = Number.parseFloat(res.data.result).toFixed(2);
+                console.log(num);
+                return num;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
     componentDidMount() {
         let query = this.props.location.state;
+        query.plane_cabin_class = query.plane_cabin_class.replace(" ", "").toLowerCase();
 
         let cityPromise = new Promise((resolve, reject) => {
             this.getAirports(query.from, query.to, resolve);
@@ -244,23 +416,30 @@ export default class Trip extends Component {
         cityPromise.then(data => {
             query['fromCode'] = data.from;
             query['toCode'] = data.to;
-            //this.search(query);
             setTimeout(() => this.search(query), 2000);
         });
+
+        let hotelQuery = {
+            destination: query.to,
+            arrival_date: query.departing,
+            departure_date: query.arriving,
+            travelers: 1
+        }
+        //this.searchHotels(hotelQuery);
     }
 
     handleOnClickOffer = index => {
         console.log("CLICKED " + index);
-        if (index === this.state.selectedOffer) {
+        if (index === this.state.openOffer) {
             this.setState({
                 ...this.state,
-                selectedOffer: null
+                openOffer: null
             });
         }
         else {
             this.setState({
                 ...this.state,
-                selectedOffer: index
+                openOffer: index
             });
         }
     }
@@ -270,16 +449,27 @@ export default class Trip extends Component {
             if (this.state.loading) {
                 return <Loader />;
             }
-            else {
+            else if (this.state.isShowingFlights) {
                 return (
                         <div className="content content--trip">
                             <section className="flights">
                                 {
-                                    this.state.offers.map((offer, index) => <Flight key={index} open={this.state.selectedOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />)
+                                    this.state.offers.map((offer, index) => <Flight key={index} open={this.state.openOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />)
                                 }
                             </section>
                         </div>
-                    )
+                    );
+            }
+            else {
+                return (
+                    <div className="content content--trip">
+                        <section className="hotels">
+                            {
+                                this.state.hotels.map((hotel, index) => <Hotel key={index} open={this.state.openOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />)
+                            }
+                        </section>
+                    </div>
+                );
             }
         } 
         else {

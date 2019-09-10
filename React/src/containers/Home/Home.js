@@ -260,7 +260,6 @@ class Home extends Component {
             WeTravel &copy; Created by <Link to="#" className="link">Aljaz Kern</Link> in 2019.
           </p>
         </section>
-        <BookingAPI />
       </div>
     )
   }

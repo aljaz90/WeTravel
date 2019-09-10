@@ -129,7 +129,7 @@ export default props => {
                 }
             </div>
             <div className={"flights--item--details" + (props.open ? " flights--item--details--open" : "")} style={{backgroundImage: color}}>
-                <div className="flights--item--details--class">Cabin class: { props.cabinClass }</div>
+                <div className="flights--item--details--class">Cabin class: { props.cabinClass === "premiumeconomy" ? "Premium Economy" : props.cabinClass }</div>
                 <div className="flights--item--details--price">{ props.flight.price + " €" }</div>
                 <a rel="noopener noreferrer" href={props.flight.offerLink} target="_blank" className={"btn btn--important flights--item--details--book flights--item--details--book--"+props.id}>Book Now</a>
             </div>
