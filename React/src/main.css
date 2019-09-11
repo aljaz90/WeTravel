@@ -744,6 +744,12 @@ body {
     font-size: 2.4rem;
     padding: 1rem 4rem; }
 
+.trip--heading {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2rem 0; }
+
 .flights {
   grid-row: 1 / 2;
   grid-column: center-start / center-end;
@@ -751,7 +757,7 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-row-gap: 2rem;
-  margin-top: 8rem; }
+  margin-top: 12rem; }
   .flights--item {
     display: flex;
     flex-direction: row;
@@ -855,3 +861,48 @@ body {
           color: #777; }
       .flights--item--details--price + .flights--item--details--book {
         margin-top: 2rem; }
+
+.hotels {
+  grid-row: 1 / 2;
+  grid-column: full-start / full-end;
+  background-color: #f4f4f4;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(min-content, 1fr));
+  grid-row-gap: 4rem;
+  grid-column-gap: 5rem;
+  margin-top: 12rem;
+  padding: 0 9rem; }
+  .hotels--item {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+    align-items: center;
+    height: 56rem; }
+    .hotels--item--image {
+      height: 21rem;
+      width: 100%;
+      background-size: cover;
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%); }
+    .hotels--item--name {
+      padding: 1rem 2rem;
+      margin-bottom: .5rem;
+      font-size: 3.2rem;
+      font-weight: 100;
+      font-family: "Raleway", sans-serif;
+      color: #ff502f; }
+    .hotels--item--name-sub {
+      padding: 0 2rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ff7b62;
+      text-align: center; }
+    .hotels--item--details {
+      display: flex;
+      flex-direction: column;
+      text-align: center; }
+      .hotels--item--details--item {
+        font-size: 1.8rem;
+        font-weight: 400; }
+      .hotels--item--details--item + .hotels--item--details--item {
+        border-top: 1px solid #eee; }

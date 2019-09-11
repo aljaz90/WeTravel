@@ -4,6 +4,7 @@ import Loader from '../../components/Loader/Loader';
 import axios from 'axios';
 import querystring from 'querystring';
 import Flight from './Flight/Flight';
+import Hotel from './Hotel/Hotel';
 
 export default class Trip extends Component {
 
@@ -425,11 +426,11 @@ export default class Trip extends Component {
             departure_date: query.arriving,
             travelers: 1
         }
-        //this.searchHotels(hotelQuery);
+        
+        this.searchHotels(hotelQuery);
     }
 
     handleOnClickOffer = index => {
-        console.log("CLICKED " + index);
         if (index === this.state.openOffer) {
             this.setState({
                 ...this.state,
@@ -444,6 +445,16 @@ export default class Trip extends Component {
         }
     }
 
+    handleOnSelectFlight = (event, index) => {
+        event.stopPropagation(); 
+        console.log(index)
+        this.setState({
+            ...this.state,
+            selectedOffer: this.state.offers[index],
+            isShowingFlights: false
+        });
+    }
+
     render() {
         if (this.props.location.state && this.props.location.state.ok) {
             if (this.state.loading) {
@@ -452,9 +463,10 @@ export default class Trip extends Component {
             else if (this.state.isShowingFlights) {
                 return (
                         <div className="content content--trip">
+                            <h1 className="heading-1 trip--heading">Select a Flight</h1>
                             <section className="flights">
                                 {
-                                    this.state.offers.map((offer, index) => <Flight key={index} open={this.state.openOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />)
+                                    this.state.offers.map((offer, index) => <Flight key={index} handleOnSelectFlight={(e) => this.handleOnSelectFlight(e, index)} open={this.state.openOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />)
                                 }
                             </section>
                         </div>
@@ -463,9 +475,10 @@ export default class Trip extends Component {
             else {
                 return (
                     <div className="content content--trip">
+                        <h1 className="heading-1 trip--heading">Select a Hotel</h1>
                         <section className="hotels">
                             {
-                                this.state.hotels.map((hotel, index) => <Hotel key={index} open={this.state.openOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />)
+                                this.state.hotels.map((hotel, index) => <Hotel key={index} open={this.state.openHotel === index} onClick={() => this.handleOnClickOffer(index)} id={index} hotel={hotel} />)
                             }
                         </section>
                     </div>
