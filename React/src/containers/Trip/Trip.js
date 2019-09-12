@@ -321,7 +321,7 @@ export default class Trip extends Component {
                         currency: hotel.currencycode,
                         all_inclusive_price: hotel.price_breakdown.all_inclusive_price,
                         min_total_price: hotel.min_total_price,
-                        price: this.convertPriceTo(hotel.min_total_price, hotel.currencycode)
+                        //price: this.convertPriceTo(hotel., hotel.currencycode)
                     },
                     ratings: {
                         total: hotel.review_score,
@@ -379,7 +379,34 @@ export default class Trip extends Component {
     }
  
     convertPriceTo = (price, from, to="EUR") => {
-        let body = {
+        let config = {
+            headers: {
+                "x-rapidapi-host": "currency-converter5.p.rapidapi.com",
+		        "x-rapidapi-key": "d9db34e064mshd0d8e9d32b2f42ep11fd0djsn59a7fc17ba87"
+            },
+            params: {
+                "format": "json",
+                "to": to,
+                "from": from,
+                "amount": price
+            }
+        };
+        let today = new Date();
+
+        axios.get("https://currency-converter5.p.rapidapi.com/currency/historical/" + today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate(), config)
+                .then(res => {
+                    if (res.status === 200) {
+                        console.log(res.data.rates[to].rate_for_amount)
+                        return res.data.rates[to].rate_for_amount;
+                    } else {
+                        console.log("BOOKING API ERROR")
+                    }
+                })
+                .catch(err => {
+                    console.log("BOOKING API ERROR")
+                    console.log(err);
+                });
+        /*let body = {
             "from-type": from,
             "to-type": to,
             "from-value": price
@@ -403,7 +430,7 @@ export default class Trip extends Component {
         })
         .catch(err => {
             console.log(err);
-        });
+        });*/
     }
 
     componentDidMount() {
