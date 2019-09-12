@@ -781,7 +781,8 @@ body {
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      padding: 2rem 0; }
+      padding: 2rem 0;
+      width: 35%; }
       .flights--item--outbound--segment, .flights--item--inbound--segment {
         padding: 1rem .5rem;
         color: #777;
@@ -838,7 +839,8 @@ body {
       text-align: center;
       background-image: linear-gradient(to right bottom, #ff7b62, #fb2800);
       padding: 2rem 3rem;
-      clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%); }
+      clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%);
+      width: 30%; }
       .flights--item--details--open {
         clip-path: none; }
       .flights--item--details--class {
@@ -878,11 +880,13 @@ body {
     background-color: #fff;
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
     align-items: center;
-    height: 56rem; }
+    height: 65rem;
+    transition: all .5s; }
+    .hotels--item:hover {
+      transform: translateY(-1rem) scale(1.06); }
     .hotels--item--image {
       height: 21rem;
       width: 100%;
-      background-size: cover;
       clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%); }
     .hotels--item--name {
       padding: 1rem 2rem;
@@ -900,9 +904,18 @@ body {
     .hotels--item--details {
       display: flex;
       flex-direction: column;
-      text-align: center; }
+      text-align: center;
+      padding: 2rem 1rem; }
       .hotels--item--details--item {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
         font-weight: 400; }
       .hotels--item--details--item + .hotels--item--details--item {
         border-top: 1px solid #eee; }
+    .hotels--item--price {
+      font-size: 3.2rem;
+      font-weight: 100;
+      color: transparent;
+      background-image: linear-gradient(#ff7b62, #fb2800);
+      background-clip: text; }
+    .hotels--item--book {
+      margin: 2rem; }

@@ -20,6 +20,7 @@ export default class Trip extends Component {
             selectedOffer: null,
             selectedHotel: null,
             isShowingFlights: true,
+            isShowingSummary: false,
             requests: {
                 flight: false,
                 hotels: false
@@ -331,6 +332,7 @@ export default class Trip extends Component {
                 });
             }
         });
+        hotels = hotels.sort((a, b) => a.price.all_inclusive_price - b.price.all_inclusive_price);
 
         this.setState({
             ...this.state,
@@ -398,39 +400,12 @@ export default class Trip extends Component {
                     if (res.status === 200) {
                         console.log(res.data.rates[to].rate_for_amount)
                         return res.data.rates[to].rate_for_amount;
-                    } else {
-                        console.log("BOOKING API ERROR")
-                    }
+                    } 
                 })
                 .catch(err => {
                     console.log("BOOKING API ERROR")
                     console.log(err);
                 });
-        /*let body = {
-            "from-type": from,
-            "to-type": to,
-            "from-value": price
-        };
-
-        let config = {
-            headers: {
-                "x-rapidapi-host": "community-neutrino-currency-conversion.p.rapidapi.com",
-                "x-rapidapi-key": "d9db34e064mshd0d8e9d32b2f42ep11fd0djsn59a7fc17ba87",
-                "content-type": "application/x-www-form-urlencoded"
-            }
-        };
-
-        axios.post("https://cors-anywhere.herokuapp.com/https://community-neutrino-currency-conversion.p.rapidapi.com/convert", querystring.stringify(body), config)
-        .then(res => {
-            if (res.status === 200) {
-                let num = Number.parseFloat(res.data.result).toFixed(2);
-                console.log(num);
-                return num;
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        });*/
     }
 
     componentDidMount() {
@@ -474,12 +449,22 @@ export default class Trip extends Component {
 
     handleOnSelectFlight = (event, index) => {
         event.stopPropagation(); 
-        console.log(index)
         this.setState({
             ...this.state,
             selectedOffer: this.state.offers[index],
             isShowingFlights: false
         });
+    }
+    
+    handleOnSelectHotel = (event, index) => {
+        event.stopPropagation(); 
+        this.setState({
+            ...this.state,
+            selectedHotel: this.state.hotels[index],
+            isShowingSummary: true
+        });
+        console.log("SELECTED HOTEL");
+        console.log(this.state.selectedHotel);
     }
 
     render() {
@@ -505,7 +490,7 @@ export default class Trip extends Component {
                         <h1 className="heading-1 trip--heading">Select a Hotel</h1>
                         <section className="hotels">
                             {
-                                this.state.hotels.map((hotel, index) => <Hotel key={index} open={this.state.openHotel === index} onClick={() => this.handleOnClickOffer(index)} id={index} hotel={hotel} />)
+                                this.state.hotels.map((hotel, index) => <Hotel key={index} handleOnSelectHotel={(e) => this.handleOnSelectHotel(e, index)} id={index} hotel={hotel} />)
                             }
                         </section>
                     </div>
