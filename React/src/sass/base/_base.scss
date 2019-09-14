@@ -25,7 +25,11 @@ body {
     &--home {
         grid-template-rows: calc(100vh - 6.36rem) min-content minmax(calc(100vh - 6.36rem), min-content) repeat(2, min-content);
     }
-
+    &--summary {
+        grid-template-rows: calc(100vh - 6.36rem - 6.36rem);
+        background-color: $color-white;
+        position: relative;
+    }
     &--trip {
         grid-template-rows: min-content min-content;
         background-color: $color-white-2;

@@ -5,6 +5,7 @@ import axios from 'axios';
 import querystring from 'querystring';
 import Flight from './Flight/Flight';
 import Hotel from './Hotel/Hotel';
+import Summary from './Summary/Summary';
 
 export default class Trip extends Component {
 
@@ -463,8 +464,29 @@ export default class Trip extends Component {
             selectedHotel: this.state.hotels[index],
             isShowingSummary: true
         });
-        console.log("SELECTED HOTEL");
-        console.log(this.state.selectedHotel);
+
+    }
+
+    handleOnGoBack = event => {
+        if (this.state.isShowingSummary) {
+            this.setState({
+                ...this.state,
+                isShowingSummary: false,
+                selectedHotel: null
+            });
+        }
+        else if (this.state.isShowingFlights)
+        {
+            window.location.replace("/");
+        }
+        else {
+            this.setState({
+                ...this.state,
+                isShowingFlights: true,
+                selectedHotel: null,
+                selectedOffer: null
+            });
+        }
     }
 
     render() {
@@ -472,26 +494,49 @@ export default class Trip extends Component {
             if (this.state.loading) {
                 return <Loader />;
             }
+            else if (this.state.isShowingSummary) {
+                return (
+                    <div className="content content--summary">
+                        <section className="summary">
+                            <Summary onGoBack={this.handleOnGoBack} cabinClass={this.props.location.state.plane_cabin_class} flight={this.state.selectedOffer} hotel={this.state.selectedHotel} />
+                        </section>
+                    </div>
+                );
+            }
             else if (this.state.isShowingFlights) {
                 return (
                         <div className="content content--trip">
-                            <h1 className="heading-1 trip--heading">Select a Flight</h1>
                             <section className="flights">
                                 {
                                     this.state.offers.map((offer, index) => <Flight key={index} handleOnSelectFlight={(e) => this.handleOnSelectFlight(e, index)} open={this.state.openOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />)
                                 }
                             </section>
+                            <div className="trip--footer">
+                                <div onClick={this.handleOnGoBack} className="trip--footer--back">
+                                    Go Back
+                                </div>
+                                <div className="trip--footer--heading">
+                                    Select a flight
+                                </div>
+                            </div>
                         </div>
                     );
             }
             else {
                 return (
                     <div className="content content--trip">
-                        <h1 className="heading-1 trip--heading">Select a Hotel</h1>
                         <section className="hotels">
                             {
                                 this.state.hotels.map((hotel, index) => <Hotel key={index} handleOnSelectHotel={(e) => this.handleOnSelectHotel(e, index)} id={index} hotel={hotel} />)
                             }
+                            <div className="trip--footer">
+                                <div onClick={this.handleOnGoBack} className="trip--footer--back">
+                                    Go Back
+                                </div>
+                                <div className="trip--footer--heading">
+                                    Select a hotel
+                                </div>
+                            </div>
                         </section>
                     </div>
                 );

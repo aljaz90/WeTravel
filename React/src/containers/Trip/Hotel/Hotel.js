@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-let convertPriceTo = (price, from, to="EUR") => {
+/*let convertPriceTo = (price, from, to="EUR") => {
   let config = {
       headers: {
           "x-rapidapi-host": "currency-converter5.p.rapidapi.com",
-      "x-rapidapi-key": "d9db34e064mshd0d8e9d32b2f42ep11fd0djsn59a7fc17ba87"
+          "x-rapidapi-key": "d9db34e064mshd0d8e9d32b2f42ep11fd0djsn59a7fc17ba87"
       },
       params: {
           "format": "json",
@@ -26,7 +26,7 @@ let convertPriceTo = (price, from, to="EUR") => {
     .catch(err => {
         console.log(err);
     });
-}
+}*/
 
 export default props => {
   let [price, setPrice] = useState(0);

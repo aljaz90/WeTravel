@@ -5,6 +5,45 @@
         transform: translateX(-50%);
         padding: 2rem 0;
     }
+
+    &--footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 6.36rem;
+        background-image: linear-gradient($color-primary-light, $color-primary-dark);
+        z-index: 20;
+
+        &--back {
+            border-radius: 200px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border: 5px solid $color-white;
+            background: transparent;
+            cursor: pointer;
+            color: $color-white;
+            padding: 1rem 3rem;
+            transition: all .2s;
+
+            &:hover {
+                background: $color-white;
+                color: $color-grey-2;
+            }
+        }
+
+        &--heading {
+            color: $color-white;
+            font-size: 3.2rem;
+            font-weight: 700;
+            font-family: $font-heading;
+            text-transform: uppercase;
+        }
+    }
 }
 
 .flights {
@@ -14,7 +53,8 @@
     display: grid;
     grid-template-columns: 1fr; 
     grid-row-gap: 2rem;
-    margin-top: 12rem;
+    margin-top: 4rem;
+    margin-bottom: 8rem;
 
     &--item {
         display: flex;
@@ -120,7 +160,7 @@
                 font-weight: 400;
                 color: $color-grey-2;
                 position: relative;
-                margin-bottom: 3rem; 
+                margin-bottom: 3rem;
             }
         }
 
@@ -179,7 +219,8 @@
     grid-template-columns: repeat(3, minmax(min-content, 1fr)); 
     grid-row-gap: 4rem;
     grid-column-gap: 5rem; 
-    margin-top: 12rem;
+    margin-bottom: 8rem;
+    margin-top: 4rem;
     padding: 0 9rem;
 
     &--item {
@@ -245,6 +286,100 @@
 
         &--book {
             margin: 2rem;
+        }
+    }
+}
+
+.summary {
+    grid-row: 1 / 2;
+    grid-column: center-start / center-end;
+    background-color: $color-white;
+    display: flex;
+    flex-direction: column;
+
+    &--flight-hotel {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    &--flight {
+        width: 50%;
+    }
+
+    &--hotel {
+
+        &--heading {
+            font-family: $font-heading;
+            font-weight: 600;
+            font-size: 3.2rem;
+            text-transform: uppercase;
+            color: transparent;
+            background-clip: text;
+        }
+
+        &--name {
+            color: transparent;
+            background-clip: text;
+            font-weight: 400;
+            font-size: 3.2rem;
+        }
+
+        &--name-sub {
+            color: transparent;
+            background-clip: text;
+            padding: 0 2rem;
+            font-size: 1.4rem; 
+            font-weight: 700;
+            text-align: center;
+        }
+    }
+
+    &--details {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 6.36rem;
+        justify-content: space-between;
+        padding: 2rem 6rem;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        align-items: center;
+
+        &--price {
+            color: $color-white;
+            font-weight: 100;
+            font-size: 3.2rem;
+        }
+
+        &--heading {
+            color: $color-white;
+            font-size: 3.2rem;
+            font-weight: 700;
+            font-family: $font-heading;
+            text-transform: uppercase;
+            //position: absolute;
+            //bottom: 0;
+            //left: 50%;
+            //transform: translate(-50%, -12.5%);
+        }
+
+        &--book {
+            border-radius: 200px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border: 5px solid $color-white;
+            background: transparent;
+            cursor: pointer;
+            color: $color-white;
+            padding: 1rem 3rem;
+            transition: all .2s;
+
+            &:hover {
+                background: $color-white;
+                color: $color-grey-2;
+            }
         }
     }
 }
