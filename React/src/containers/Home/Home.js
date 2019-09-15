@@ -5,6 +5,7 @@ import { faMapMarkedAlt, faPlaneDeparture, faBoxOpen, faHome } from '@fortawesom
 import { HashLink } from 'react-router-hash-link';
 import Offer from '../../components/Home/Offer/Offer';
 import Form from '../../components/Form/Form';
+import NotificationSystem from '../../components/NotificationSystem/NotificationSystem';
 
 class Home extends Component {
 
@@ -100,7 +101,7 @@ class Home extends Component {
         ...values,
         ok: true
       }
-    })
+    });
   }
 
   formatMonth = month => {
@@ -117,6 +118,17 @@ class Home extends Component {
   }
 
   render() {
+
+    this.props.history.push({
+      pathname: '/test',
+      state: {
+        ok: false,
+        info: {
+          title: "Error 404",
+          message: "File not found"
+        }
+      }
+    });
 
     const destinationAirportsData = [
       {name: "Everywhere", data: "everywhere"},
@@ -161,8 +173,12 @@ class Home extends Component {
       {name: 'budget', data: {}, validation: {reqired: true, min: 100, max: 1000000, step: 100}, type: 'number'},
       {name: 'travelers', data: {}, validation: {reqired: true, min: 1, max: 16, step: 1}, type: 'number'}
     ];
-
+    console.log(this.props)
     return (
+      <React.Fragment>
+      {
+        this.props.location.state && !this.props.location.state.ok ? <NotificationSystem location={this.props.location} history={this.props.history} /> : ""
+      }
       <div className="content content--home">
         <section id="top" className="header">
           <div className="header--welcome">
@@ -263,6 +279,7 @@ class Home extends Component {
           </p>
         </section>
       </div>
+      </React.Fragment>
     )
   }
 }

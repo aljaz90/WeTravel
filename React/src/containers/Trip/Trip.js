@@ -6,6 +6,7 @@ import querystring from 'querystring';
 import Flight from './Flight/Flight';
 import Hotel from './Hotel/Hotel';
 import Summary from './Summary/Summary';
+import NotificationSystem from '../../components/NotificationSystem/NotificationSystem';
 
 export default class Trip extends Component {
 
@@ -496,15 +497,24 @@ export default class Trip extends Component {
             }
             else if (this.state.isShowingSummary) {
                 return (
+                    <React.Fragment>
+                    {
+                        this.props.location.state && !this.props.location.state.ok ? <NotificationSystem location={this.props.location} history={this.props.history} /> : ""
+                    }
                     <div className="content content--summary">
                         <section className="summary">
                             <Summary onGoBack={this.handleOnGoBack} cabinClass={this.props.location.state.plane_cabin_class} flight={this.state.selectedOffer} hotel={this.state.selectedHotel} />
                         </section>
                     </div>
+                    </React.Fragment>
                 );
             }
             else if (this.state.isShowingFlights) {
                 return (
+                        <React.Fragment>
+                        {
+                            this.props.location.state && !this.props.location.state.ok ? <NotificationSystem location={this.props.location} history={this.props.history} /> : ""
+                        }
                         <div className="content content--trip">
                             <section className="flights">
                                 {
@@ -520,10 +530,15 @@ export default class Trip extends Component {
                                 </div>
                             </div>
                         </div>
+                        </React.Fragment>
                     );
             }
             else {
                 return (
+                    <React.Fragment>
+                    {
+                        this.props.location.state && !this.props.location.state.ok ? <NotificationSystem location={this.props.location} history={this.props.history} /> : ""
+                    }
                     <div className="content content--trip">
                         <section className="hotels">
                             {
@@ -539,6 +554,7 @@ export default class Trip extends Component {
                             </div>
                         </section>
                     </div>
+                    </React.Fragment>
                 );
             }
         } 
