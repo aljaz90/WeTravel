@@ -91,6 +91,9 @@ class Home extends Component {
       return;
     }
 
+    values.departing = this.formatDate(new Date(values.departing));
+    values.arriving = this.formatDate(new Date(values.arriving));
+
     this.props.history.push({
       pathname: '/trip',
       state: {

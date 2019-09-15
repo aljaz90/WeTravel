@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Input from './Input/Input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlaneDeparture, faPlaneArrival } from '@fortawesome/free-solid-svg-icons';
+import DatePicker from '../DatePicker/DatePicker';
 
 export default class Form extends Component {
 
@@ -13,8 +14,15 @@ export default class Form extends Component {
     }
 
     handleOnValueChange = (name, value) => {
+        console.log(name+" - "+value)
+        console.log(this.state)
         let values = {...this.state.values};
-        values[name] = value; 
+        if (name === "deparingarriving") {
+            values.departing = value.departing;
+            values.arriving = value.arriving;
+        }else {
+            values[name] = value; 
+        }
         this.setState({...this.state, values});
     }
 
@@ -37,8 +45,8 @@ export default class Form extends Component {
                             <Input noLabel={true} inline={true} pos={2} key={inputs[1].name} data={inputs[1].data} validation={inputs[1].validation} type={inputs[1].type} onChanged={this.handleOnValueChange} name={this.capitalize(inputs[1].name)} id={inputs[1].name} />
                         </div>
                         <div className="form-home--input-group--home u-margin-bottom-sm">
-                            <Input noLabel={true} inline={true} pos={1} key={inputs[2].name} data={inputs[2].data} validation={inputs[2].validation} type={inputs[2].type} onChanged={this.handleOnValueChange} name={this.capitalize(inputs[2].name)} id={inputs[2].name} />
-                            <Input noLabel={true} inline={true} pos={2} key={inputs[3].name} data={inputs[3].data} validation={inputs[3].validation} type={inputs[3].type} onChanged={this.handleOnValueChange} name={this.capitalize(inputs[3].name)} id={inputs[3].name} />
+                            <DatePicker onChanged={this.handleOnValueChange} type="range" placeholder="Outbound Date" placeholder2="Return Date" />
+                            
                         </div>
                         <div className="form-home--input-group--home">
                             <Input noLabel={true} inline={true} pos={1} key={inputs[4].name} data={inputs[4].data} validation={inputs[4].validation} type={inputs[4].type} onChanged={this.handleOnValueChange} name={this.capitalize(inputs[4].name)} id={inputs[4].name} />

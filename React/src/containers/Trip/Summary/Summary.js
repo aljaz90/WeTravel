@@ -4,11 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlaneDeparture, faPlaneArrival } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-let formatTime = time => {
-    let timeToReturn = time + "";
-    return timeToReturn.length === 1 ? ("0"+timeToReturn) : timeToReturn;
-};
-
 export default props => {
 
     let [currentBackgroundColor, setCurrentBackgroundColor] = useState(null);
