@@ -524,6 +524,37 @@ body {
   to {
     transform: translateY(0); } }
 
+.sort {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 1rem; }
+  .sort--title {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #ff502f;
+    text-transform: capitalize; }
+  .sort--options {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+  .sort--option {
+    background-color: #f4f4f4;
+    font-size: 1.8rem;
+    font-weight: 400;
+    padding: .6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: capitalize; }
+    .sort--option--selected {
+      background-color: #ff502f;
+      color: #fff; }
+  .sort--option + .sort--option {
+    margin-left: 2rem; }
+
 .nav {
   width: 100vw;
   background-color: #32dbc6;

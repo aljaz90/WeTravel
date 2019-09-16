@@ -7,6 +7,8 @@ import Flight from './Flight/Flight';
 import Hotel from './Hotel/Hotel';
 import Summary from './Summary/Summary';
 import NotificationSystem from '../../components/NotificationSystem/NotificationSystem';
+import VisibilitySensor from 'react-visibility-sensor';
+import Sort from '../../components/Sort/Sort';
 
 export default class Trip extends Component {
 
@@ -15,6 +17,10 @@ export default class Trip extends Component {
         this.state = {
             loading: true,
             offers: [],
+            offersDisplay: {
+                firstIndex: 0,
+                lastIndex: 10
+            },
             hotels: [],
             responseData: {},
             openOffer: null,
@@ -28,6 +34,7 @@ export default class Trip extends Component {
                 hotels: false
             }
         };
+        this.lastOffer = {};
     }
 
     // FLIGHT SEARCH
@@ -96,6 +103,16 @@ export default class Trip extends Component {
         })
         .catch(err => {
             console.log(err);
+            this.props.history.push({
+                pathname: '/',
+                state: {
+                  ok: false,
+                  info: {
+                    title: "Flight API Error",
+                    message: "Unable to create a session"
+                  }
+                }
+              });
         });
     }
 
@@ -115,13 +132,16 @@ export default class Trip extends Component {
             })
             .catch(err => {
                 console.log(err);
-                /*this.props.history.push({
+                this.props.history.push({
                     pathname: '/',
                     state: {
-                      info: "Error creating Trip",
-                      ok: false
+                      ok: false,
+                      info: {
+                        title: "Flight API Error",
+                        message: "Unable to connect to the API"
+                      }
                     }
-                  });*/
+                  });
             });
     }
 
@@ -292,17 +312,50 @@ export default class Trip extends Component {
                         this.parseHotels(res.data.result);
                     } else {
                         console.log("BOOKING API ERROR")
+
+                        this.props.history.push({
+                            pathname: '/',
+                            state: {
+                              ok: false,
+                              info: {
+                                title: "Booking API Error",
+                                message: "Unable to connect to the API"
+                              }
+                            }
+                          });
                     }
                 })
                 .catch(err => {
                     console.log("BOOKING API ERROR")
                     console.log(err);
+
+                    this.props.history.push({
+                        pathname: '/',
+                        state: {
+                          ok: false,
+                          info: {
+                            title: "Booking API Error",
+                            message: "Unable to connect to the API"
+                          }
+                        }
+                      });
                 });
             }
         })
         .catch(err => {
             console.log("BOOKING API ERROR")
             console.log(err);
+
+            this.props.history.push({
+                pathname: '/',
+                state: {
+                  ok: false,
+                  info: {
+                    title: "Booking API Error",
+                    message: "Unable to connect to the API"
+                  }
+                }
+              });
         });
     }
 
@@ -373,6 +426,7 @@ export default class Trip extends Component {
         else {
             this.setState({
                 ...this.state,
+                loading: false, // DEV
                 requests: {
                     ...this.state.requests,
                     [action]: true
@@ -380,6 +434,16 @@ export default class Trip extends Component {
             });
             console.log("DONE 1/2");
         }
+    }
+
+    showMoreFlights = num => {
+        this.setState({
+            ...this.state,
+            offersDisplay: {
+                ...this.state.offersDisplay,
+                lastIndex: this.state.offersDisplay.lastIndex+num
+            }
+        })
     }
  
     convertPriceTo = (price, from, to="EUR") => {
@@ -405,8 +469,9 @@ export default class Trip extends Component {
                     } 
                 })
                 .catch(err => {
-                    console.log("BOOKING API ERROR")
+                    console.log("CURRENCY CONVERT API ERROR")
                     console.log(err);
+                    
                 });
     }
 
@@ -431,7 +496,7 @@ export default class Trip extends Component {
             travelers: 1
         }
         
-        this.searchHotels(hotelQuery);
+        //this.searchHotels(hotelQuery);
     }
 
     handleOnClickOffer = index => {
@@ -468,6 +533,26 @@ export default class Trip extends Component {
 
     }
 
+    handleSortChange = (option, arrayName) => {
+        console.log(option, arrayName)
+        let array = this.state[arrayName];
+
+        if (option === "fastest") {
+            
+        }
+        else if (option === "best") {
+
+        }
+        else if (option === "cheapest") {
+
+        }
+
+        this.setState({
+            ...this.state,
+            [arrayName]: array
+        });
+    }
+
     handleOnGoBack = event => {
         if (this.state.isShowingSummary) {
             this.setState({
@@ -487,6 +572,12 @@ export default class Trip extends Component {
                 selectedHotel: null,
                 selectedOffer: null
             });
+        }
+    }
+
+    handleOnFlightVisibilityChange = visible => {
+        if (visible) {
+            this.showMoreFlights(10);
         }
     }
 
@@ -510,15 +601,32 @@ export default class Trip extends Component {
                 );
             }
             else if (this.state.isShowingFlights) {
+
+                let displayingFlights = this.state.offers.filter((flight, index) => {
+                    if (index <= this.state.offersDisplay.lastIndex) {
+                        return flight;
+                    }
+                    return null;
+                });
+                // DEV
+
                 return (
                         <React.Fragment>
                         {
                             this.props.location.state && !this.props.location.state.ok ? <NotificationSystem location={this.props.location} history={this.props.history} /> : ""
                         }
-                        <div className="content content--trip">
-                            <section className="flights">
+                        <div className="content content--trip" onScroll={() => console.log("SCROLL CALLED")}>
+                            <section className="flights" >
+                                <Sort onChange={(opt) => this.handleSortChange(opt, "offers")} options={["cheapest", "fastest", "best"]} />
                                 {
-                                    this.state.offers.map((offer, index) => <Flight key={index} handleOnSelectFlight={(e) => this.handleOnSelectFlight(e, index)} open={this.state.openOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />)
+                                    displayingFlights.map((offer, index) => {
+                                    if (index === this.state.offersDisplay.lastIndex){
+                                        return (<VisibilitySensor onChange={this.handleOnFlightVisibilityChange}>
+                                                    <Flight key={index} handleOnSelectFlight={(e) => this.handleOnSelectFlight(e, index)} open={this.state.openOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />
+                                                </VisibilitySensor>);
+                                    }
+                                    
+                                    return (<Flight key={index} handleOnSelectFlight={(e) => this.handleOnSelectFlight(e, index)} open={this.state.openOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />);})
                                 }
                             </section>
                             <div className="trip--footer">

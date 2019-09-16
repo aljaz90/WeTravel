@@ -119,17 +119,6 @@ class Home extends Component {
 
   render() {
 
-    this.props.history.push({
-      pathname: '/test',
-      state: {
-        ok: false,
-        info: {
-          title: "Error 404",
-          message: "File not found"
-        }
-      }
-    });
-
     const destinationAirportsData = [
       {name: "Everywhere", data: "everywhere"},
       {name: "Ljubljana", data: "LJU"},

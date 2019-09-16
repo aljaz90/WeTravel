@@ -53,6 +53,16 @@ export default props => {
     })
     .catch(err => {
         console.log(err);
+        this.props.history.push({
+          pathname: '/trip',
+          state: {
+            ok: false,
+            info: {
+              title: "Convert API Error",
+              message: "Unable to convert currency"
+            }
+          }
+        });
     });
   
   return (
