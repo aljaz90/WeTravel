@@ -9,6 +9,7 @@ import Summary from './Summary/Summary';
 import NotificationSystem from '../../components/NotificationSystem/NotificationSystem';
 import VisibilitySensor from 'react-visibility-sensor';
 import Sort from '../../components/Sort/Sort';
+import Filter from '../../components/Filter/Filter';
 
 export default class Trip extends Component {
 
@@ -626,6 +627,7 @@ export default class Trip extends Component {
                         <div className="content content--trip" onScroll={() => console.log("SCROLL CALLED")}>
                             <section className="flights" >
                                 <Sort onChange={(opt) => this.handleSortChange(opt, "offers")} options={["cheapest", "fastest", "best"]} />
+                                <Filter categories={[{name: "Stops", options: ["Not important", "up to 1", "up to 2"]}, {name: "Airlines", options: ["Adria", "Test", "Emiratos"]}]} />
                                 {
                                     displayingFlights.map((offer, index) => {
                                     if (index === this.state.offersDisplay.lastIndex){

@@ -555,6 +555,74 @@ body {
   .sort--option + .sort--option {
     margin-left: 2rem; }
 
+.filter {
+  position: fixed;
+  left: 0;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 30rem;
+  transform: translate(4rem, 0);
+  border-radius: 4px;
+  align-items: center; }
+  .filter--heading {
+    text-transform: capitalize;
+    font-weight: 100;
+    font-size: 3.2rem;
+    color: #ff502f;
+    margin-bottom: .6rem; }
+  .filter--category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 2rem;
+    color: #777; }
+    .filter--category--heading {
+      font-weight: 700;
+      font-size: 1.8rem;
+      cursor: pointer; }
+    .filter--category--option {
+      display: flex;
+      flex-direction: row;
+      position: relative; }
+      .filter--category--option--name {
+        font-weight: 500;
+        font-size: 1.4rem; }
+      .filter--category--option--checkbox {
+        /*border: none;
+                background-color: $color-white-2;
+                padding: 1rem;
+                position: absolute;*/
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0; }
+      .filter--category--option--checkbox:checked ~ .filter--category--option--checkbox-custom {
+        background-color: #ff502f; }
+      .filter--category--option--checkbox:checked ~ .filter--category--option--checkbox-custom::after {
+        display: block; }
+      .filter--category--option--checkbox-custom {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 2.5rem;
+        width: 2.5rem;
+        background-color: #f4f4f4; }
+        .filter--category--option--checkbox-custom::after {
+          content: "";
+          position: absolute;
+          display: none;
+          left: 9px;
+          top: 5px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 3px 3px 0;
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg); }
+
 .nav {
   width: 100vw;
   background-color: #32dbc6;
