@@ -533,18 +533,26 @@ export default class Trip extends Component {
 
     }
 
+    getFlightDuration = flight => {
+        console.log(flight)
+        return flight.outboundFlight.totalDuration + flight.inboundFlight.totalDuration;
+    }
+
     handleSortChange = (option, arrayName) => {
         console.log(option, arrayName)
         let array = this.state[arrayName];
 
         if (option === "fastest") {
-            
+            array = array.sort((a, b) => this.getFlightDuration(a) - this.getFlightDuration(b));
         }
         else if (option === "best") {
+            array = array.sort((x, y) => { return x.price - y.price || this.getFlightDuration(x) - this.getFlightDuration(y); });
+            /*let fastestArray = array.sort((a, b) => this.getFlightDuration(a) - this.getFlightDuration(b));
+            let cheapestArray = array.sort((a, b) => a.price - b.price);*/
 
         }
         else if (option === "cheapest") {
-
+            array = array.sort((a, b) => a.price - b.price);
         }
 
         this.setState({
