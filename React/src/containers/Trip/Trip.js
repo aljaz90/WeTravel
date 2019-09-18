@@ -20,7 +20,8 @@ export default class Trip extends Component {
             offers: [],
             offersDisplay: {
                 firstIndex: 0,
-                lastIndex: 10
+                lastIndex: 10,
+                filters: []
             },
             hotels: [],
             responseData: {},
@@ -590,6 +591,16 @@ export default class Trip extends Component {
         }
     }
 
+    handleOnOptionSelected = options => {
+       this.setState({
+           ...this.state,
+           offersDisplay: {
+               ...this.state.offersDisplay,
+               filters: options
+           }
+       });
+    }
+
     render() {
         if (this.props.location.state && this.props.location.state.ok) {
             if (this.state.loading) {
@@ -617,8 +628,8 @@ export default class Trip extends Component {
                     }
                     return null;
                 });
+                let airlines = this.state.responseData.Carriers.map(carrier => carrier.Name);
                 // DEV
-
                 return (
                         <React.Fragment>
                         {
@@ -627,7 +638,7 @@ export default class Trip extends Component {
                         <div className="content content--trip" onScroll={() => console.log("SCROLL CALLED")}>
                             <section className="flights" >
                                 <Sort onChange={(opt) => this.handleSortChange(opt, "offers")} options={["cheapest", "fastest", "best"]} />
-                                <Filter categories={[{name: "Stops", options: ["Not important", "up to 1", "up to 2"]}, {name: "Airlines", options: ["Adria", "Test", "Emiratos"]}]} />
+                                <Filter onOptionSelected={this.handleOnOptionSelected} categories={[{name: "Stops", options: ["up to 1", "up to 2"]}, {name: "Airlines", options: airlines}]} />
                                 {
                                     displayingFlights.map((offer, index) => {
                                     if (index === this.state.offersDisplay.lastIndex){

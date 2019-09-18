@@ -556,9 +556,9 @@ body {
     margin-left: 2rem; }
 
 .filter {
-  position: fixed;
+  position: absolute;
   left: 0;
-  top: 30%;
+  top: 10%;
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -585,10 +585,12 @@ body {
     .filter--category--option {
       display: flex;
       flex-direction: row;
-      position: relative; }
+      position: relative;
+      width: 100%; }
       .filter--category--option--name {
         font-weight: 500;
-        font-size: 1.4rem; }
+        font-size: 1.4rem;
+        cursor: pointer; }
       .filter--category--option--checkbox {
         /*border: none;
                 background-color: $color-white-2;
@@ -605,10 +607,11 @@ body {
       .filter--category--option--checkbox-custom {
         position: absolute;
         top: 0;
-        left: 0;
+        left: -2rem;
         height: 2.5rem;
         width: 2.5rem;
-        background-color: #f4f4f4; }
+        background-color: #f4f4f4;
+        cursor: pointer; }
         .filter--category--option--checkbox-custom::after {
           content: "";
           position: absolute;
@@ -622,6 +625,8 @@ body {
           -webkit-transform: rotate(45deg);
           -ms-transform: rotate(45deg);
           transform: rotate(45deg); }
+    .filter--category--option + .filter--category--option {
+      margin-top: 1rem; }
 
 .nav {
   width: 100vw;

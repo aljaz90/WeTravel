@@ -16,6 +16,7 @@ export default props => {
             options.push(option);
         }
         setSelectedOptions(options);
+        props.onOptionSelected(options);
     };
 
     let selectCategory = category => {
@@ -32,7 +33,7 @@ export default props => {
     return (
         <div className="filter">
             <div className="filter--heading">
-                Filter by
+                Filter by:
             </div>
             { props.categories.map(category => (
                 <div className="filter--category">
