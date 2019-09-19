@@ -72,6 +72,8 @@
                 &--leftArr {
                     cursor: pointer;
                     transition: all .2s;
+                    width: 2rem !important;
+                    height: 3rem;
 
                     &:hover {
                         transform: scale(1.09) translateX(-.5rem);
@@ -80,12 +82,14 @@
 
                 &--heading {
                     font-size: 1.6rem;
-                    font-weight: 400;
+                    font-weight: 400; 
                 }
 
                 &--rightArr {
                     cursor: pointer;
                     transition: all .2s;
+                    width: 2rem !important;
+                    height: 3rem;
 
                     &:hover {
                         transform: scale(1.09) translateX(.5rem);

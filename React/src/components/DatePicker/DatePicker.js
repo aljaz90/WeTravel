@@ -114,7 +114,7 @@ export default props => {
         let endDate = new Date(selectedDate2);
 
         return (
-            <div onMouseEnter={() => toggleCalendar(true)} onMouseLeave={() => toggleCalendar(false)} className="date-picker date-picker--range">
+            <div onMouseEnter={() => toggleCalendar(true)} onMouseLeave={() => toggleCalendar(true)} className="date-picker date-picker--range">
                 <input required placeholder={props.placeholder} value={selectedDate} type="text" className="date-picker--input" />
                 <FontAwesomeIcon className="date-picker--icon" icon={faCalendar} />
                 { showingCalendar ? 
