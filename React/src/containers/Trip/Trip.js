@@ -21,7 +21,14 @@ export default class Trip extends Component {
             offersDisplay: {
                 firstIndex: 0,
                 lastIndex: 10,
-                filters: []
+                filters: {
+                    airlines: [],
+                    stops: {
+                        direct: false,
+                        up_to_1: false,
+                        up_to_2: false
+                    }
+                }
             },
             hotels: [],
             responseData: {},
@@ -591,14 +598,35 @@ export default class Trip extends Component {
         }
     }
 
-    handleOnOptionSelected = options => {
-       this.setState({
-           ...this.state,
-           offersDisplay: {
-               ...this.state.offersDisplay,
-               filters: options
-           }
-       });
+    handleOnOptionSelected = (category, option) => {
+        let filterCategory = this.state.offersDisplay.filters[category.toLowerCase()];
+        if (category === "Airlines") {
+            let index = filterCategory.indexOf(option);
+            if (index === -1) {
+                filterCategory.push(option);
+            } else {
+                filterCategory.splice(index, 1);
+            }
+        } else if (category === "Stops") {
+            if (option === "direct") {
+                filterCategory.direct = !filterCategory.direct;
+            } else if (option === "up to 1") {
+                filterCategory.up_to_1 = !filterCategory.up_to_1;
+            } else if (option === "up to 2") {
+                filterCategory.up_to_2 = !filterCategory.up_to_2;
+            }
+        }
+
+        this.setState({
+            ...this.state,
+            offersDisplay: {
+                ...this.state.offersDisplay,
+                filters: {
+                    ...this.state.offersDisplay.filters,
+                    [category.toLowerCase()]: filterCategory
+                }
+            }
+        });
     }
 
     render() {
@@ -621,8 +649,26 @@ export default class Trip extends Component {
                 );
             }
             else if (this.state.isShowingFlights) {
+                console.log(this.state.offersDisplay.filters.airlines)
 
-                let displayingFlights = this.state.offers.filter((flight, index) => {
+                let filteredFlights = this.state.offers.filter((flight, index) => {
+                    if (this.state.offersDisplay.filters.airlines.length > 0 && (!this.state.offersDisplay.filters.airlines.includes(flight.outboundFlight.carrier.Name) || !this.state.offersDisplay.filters.airlines.includes(flight.inboundFlight.carrier.Name))) {
+                        return null;
+                    }
+                    else if (this.state.offersDisplay.filters.stops.direct && (flight.outboundFlight.stops.length !== 0 || flight.inboundFlight.stops.length !== 0)) {
+                        return null;
+                    }
+                    else if (this.state.offersDisplay.filters.stops.up_to_1 && (flight.outboundFlight.stops.length > 1 || flight.inboundFlight.stops.length > 1)) {
+                        return null;
+                    }
+                    else if (this.state.offersDisplay.filters.stops.up_to_2 && (flight.outboundFlight.stops.length > 2 || flight.inboundFlight.stops.length > 2)) {
+                        return null;
+                    }
+
+                    return flight;
+                });
+
+                let displayingFlights = filteredFlights.filter((flight, index) => {
                     if (index <= this.state.offersDisplay.lastIndex) {
                         return flight;
                     }
@@ -638,7 +684,7 @@ export default class Trip extends Component {
                         <div className="content content--trip" onScroll={() => console.log("SCROLL CALLED")}>
                             <section className="flights" >
                                 <Sort onChange={(opt) => this.handleSortChange(opt, "offers")} options={["cheapest", "fastest", "best"]} />
-                                <Filter onOptionSelected={this.handleOnOptionSelected} categories={[{name: "Stops", options: ["up to 1", "up to 2"]}, {name: "Airlines", options: airlines}]} />
+                                <Filter onOptionSelected={this.handleOnOptionSelected} categories={[{name: "Stops", options: ["direct", "up to 1", "up to 2"]}, {name: "Airlines", options: airlines}]} />
                                 {
                                     displayingFlights.map((offer, index) => {
                                     if (index === this.state.offersDisplay.lastIndex){

@@ -16,7 +16,7 @@ export default props => {
             options.push(option);
         }
         setSelectedOptions(options);
-        props.onOptionSelected(options);
+        props.onOptionSelected(category, option);
     };
 
     let selectCategory = category => {
