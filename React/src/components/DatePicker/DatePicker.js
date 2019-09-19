@@ -46,17 +46,15 @@ export default props => {
         }
 
         for (let i = 1; i<32; i++) {
-            let newDate = new Date(`${currentDate.getFullYear()}-${formatDate(currentDate.getMonth()+1)}-${formatDate(1)}`);
-            console.log(i);
-            console.log(newDate);
+            let newDate = new Date(`${currentDate.getFullYear()}-${formatDate(currentDate.getMonth()+1)}-${formatDate(i)}`);
+
             if (isNaN(newDate.getDate())) {
                 break;
             }
             dates.push({ date: `${newDate.getFullYear()}-${formatDate(newDate.getMonth()+1)}-${formatDate(i)}`, disabled: (today > newDate) || (newDate > maxDate), day: newDate.getDay() === 0 ? 7 : newDate.getDay() });
         }
 
-        console.log("DATES")
-        console.log(dates)
+        
 
         let lastDate = new Date(dates[dates.length-1].date);
         if (lastDate.getDay() !== 0) {
@@ -68,6 +66,9 @@ export default props => {
                 }
             }
         }
+
+        console.log("DATES")
+        console.log(dates)
 
         return dates;
     };
