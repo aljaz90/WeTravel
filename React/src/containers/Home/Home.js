@@ -162,7 +162,7 @@ class Home extends Component {
       {name: 'budget', data: {}, validation: {reqired: true, min: 100, max: 1000000, step: 100}, type: 'number'},
       {name: 'travelers', data: {}, validation: {reqired: true, min: 1, max: 16, step: 1}, type: 'number'}
     ];
-    console.log(this.props)
+
     return (
       <React.Fragment>
       {

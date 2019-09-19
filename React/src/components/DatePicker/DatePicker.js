@@ -6,6 +6,15 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
 
+let formatDate = date => {
+    date += "";
+    if (date.length > 1) {
+        return date;
+    } else {
+        return "0"+date;
+    }
+};
+
 export default props => {
 
     let [showingCalendar, setShowCalendar] = useState(false);
@@ -19,17 +28,17 @@ export default props => {
 
     let getDatesInMonth = () => {
         let dates = [];
-        let date2 = new Date(`${currentDate.getFullYear()}-${currentDate.getMonth()+1}-1`);
+        let date2 = new Date(`${currentDate.getFullYear()}-${formatDate(currentDate.getMonth()+1)}-01`);
         let today = new Date();
-        let maxDate = new Date(`${today.getFullYear()+1}-${today.getMonth()+1}-${today.getDate()}`);
+        let maxDate = new Date(`${today.getFullYear()+1}-${formatDate(today.getMonth()+1)}-${formatDate(today.getDate())}`);
 
         if (date2.getDay() !== 1) {
             let additionalDays = (date2.getDay() === 0 ? 7 : date2.getDay())-1;
             let i = 31;
             do {
-                let additionalDate = new Date(`${date2.getMonth() === 0 ? date2.getFullYear()-1 : date2.getFullYear()}-${date2.getMonth() === 0 ? 12 : date2.getMonth()}-${i}`);
+                let additionalDate = new Date(`${date2.getMonth() === 0 ? date2.getFullYear()-1 : date2.getFullYear()}-${date2.getMonth() === 0 ? 12 : formatDate(date2.getMonth())}-${formatDate(i)}`);
                 if (!isNaN(additionalDate.getDate())) {
-                    dates.push({ date: `${additionalDate.getFullYear()}-${additionalDate.getMonth()+1}-${i}`, disabled: (today > additionalDate) || (additionalDate > maxDate), day: additionalDate.getDay() === 0 ? 7 : additionalDate.getDay() });
+                    dates.push({ date: `${additionalDate.getFullYear()}-${formatDate(additionalDate.getMonth()+1)}-${formatDate(i)}`, disabled: (today > additionalDate) || (additionalDate > maxDate), day: additionalDate.getDay() === 0 ? 7 : additionalDate.getDay() });
                 }
                 i--;
             } while(dates.length < additionalDays);
@@ -37,20 +46,25 @@ export default props => {
         }
 
         for (let i = 1; i<32; i++) {
-            let newDate = new Date(`${currentDate.getFullYear()}-${currentDate.getMonth()+1}-${i}`);
+            let newDate = new Date(`${currentDate.getFullYear()}-${formatDate(currentDate.getMonth()+1)}-${formatDate(1)}`);
+            console.log(i);
+            console.log(newDate);
             if (isNaN(newDate.getDate())) {
                 break;
             }
-            dates.push({ date: `${newDate.getFullYear()}-${newDate.getMonth()+1}-${i}`, disabled: (today > newDate) || (newDate > maxDate), day: newDate.getDay() === 0 ? 7 : newDate.getDay() });
+            dates.push({ date: `${newDate.getFullYear()}-${formatDate(newDate.getMonth()+1)}-${formatDate(i)}`, disabled: (today > newDate) || (newDate > maxDate), day: newDate.getDay() === 0 ? 7 : newDate.getDay() });
         }
+
+        console.log("DATES")
+        console.log(dates)
 
         let lastDate = new Date(dates[dates.length-1].date);
         if (lastDate.getDay() !== 0) {
             let additionalDays = 7 - lastDate.getDay();
             for (let i = 1; i<=additionalDays; i++){
-                let additionalDate = new Date(`${lastDate.getMonth() === 11 ? lastDate.getFullYear()+1 : lastDate.getFullYear()}-${lastDate.getMonth() === 11 ? 1 : lastDate.getMonth()+2}-${i}`);
+                let additionalDate = new Date(`${lastDate.getMonth() === 11 ? lastDate.getFullYear()+1 : lastDate.getFullYear()}-${lastDate.getMonth() === 11 ? "01" : formatDate(lastDate.getMonth()+2)}-${formatDate(i)}`);
                 if (!isNaN(additionalDate.getDate())) {
-                    dates.push({ date: `${additionalDate.getFullYear()}-${additionalDate.getMonth()+1}-${i}`, disabled: (today > additionalDate) || (additionalDate > maxDate), day: additionalDate.getDay() === 0 ? 7 : additionalDate.getDay() });
+                    dates.push({ date: `${additionalDate.getFullYear()}-${formatDate(additionalDate.getMonth()+1)}-${formatDate(i)}`, disabled: (today > additionalDate) || (additionalDate > maxDate), day: additionalDate.getDay() === 0 ? 7 : additionalDate.getDay() });
                 }
             }
         }
@@ -70,7 +84,7 @@ export default props => {
             newMonth = 12;
         }
 
-        let date = new Date(`${newYear}-${newMonth}-1`);
+        let date = new Date(`${newYear}-${formatDate(newMonth)}-01`);
         setCurrentDate(date);
     };
 
