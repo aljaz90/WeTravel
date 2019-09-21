@@ -1,7 +1,7 @@
 .filter {
     position: absolute;
     left: 0;
-    top: 10%;
+    top: 10.36rem;
     display: flex;
     flex-direction: column;
     background-color: $color-white;
@@ -9,6 +9,17 @@
     transform: translate(4rem, 0);
     border-radius: 4px;
     align-items: center;
+
+    &--hotels {
+        top: -14rem;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 91%;
+        min-height: 12rem;
+        padding: 2rem;
+        flex-direction: row;
+        justify-content: space-around;
+    }
 
     &--heading {
         text-transform: capitalize;
@@ -29,6 +40,7 @@
             font-weight: 700;
             font-size: 1.8rem;
             cursor: pointer;
+            user-select: none;
         }
 
         &--option {
@@ -41,6 +53,7 @@
                 font-weight: 500;
                 font-size: 1.4rem;
                 cursor: pointer;
+                user-select: none;
             }
 
             &--checkbox {
@@ -75,15 +88,14 @@
                     content: "";
                     position: absolute;
                     display: none;
-                    left: 9px;
-                    top: 5px;
+                    left: 50%;
+                    top: 50%;
                     width: 5px;
                     height: 10px;
                     border: solid white;
                     border-width: 0 3px 3px 0;
-                    -webkit-transform: rotate(45deg);
-                    -ms-transform: rotate(45deg);
-                    transform: rotate(45deg);
+                    transform: rotate(45deg) translate(-100%, -30%);
+                    
                 }
             }
         }

@@ -7,6 +7,14 @@
     border-radius: 4px;
     padding: 1rem;
 
+    &--hotels {
+        width: 91%;
+        position: absolute;
+        top: -22rem;
+        left: 50%;
+        transform: translateX(-50%); 
+    }
+
     &--title {
         font-size: 2.3rem;
         font-weight: 700;
@@ -28,6 +36,7 @@
         border-radius: 4px;
         cursor: pointer;
         text-transform: capitalize;
+        user-select: none;
 
         &--selected {
             background-color: $color-secondary;

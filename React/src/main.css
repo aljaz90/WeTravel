@@ -536,6 +536,12 @@ body {
   background-color: #fff;
   border-radius: 4px;
   padding: 1rem; }
+  .sort--hotels {
+    width: 91%;
+    position: absolute;
+    top: -22rem;
+    left: 50%;
+    transform: translateX(-50%); }
   .sort--title {
     font-size: 2.3rem;
     font-weight: 700;
@@ -552,7 +558,8 @@ body {
     padding: .6rem;
     border-radius: 4px;
     cursor: pointer;
-    text-transform: capitalize; }
+    text-transform: capitalize;
+    user-select: none; }
     .sort--option--selected {
       background-color: #ff502f;
       color: #fff; }
@@ -562,7 +569,7 @@ body {
 .filter {
   position: absolute;
   left: 0;
-  top: 10%;
+  top: 10.36rem;
   display: flex;
   flex-direction: column;
   background-color: #fff;
@@ -570,6 +577,15 @@ body {
   transform: translate(4rem, 0);
   border-radius: 4px;
   align-items: center; }
+  .filter--hotels {
+    top: -14rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 91%;
+    min-height: 12rem;
+    padding: 2rem;
+    flex-direction: row;
+    justify-content: space-around; }
   .filter--heading {
     text-transform: capitalize;
     font-weight: 100;
@@ -585,7 +601,8 @@ body {
     .filter--category--heading {
       font-weight: 700;
       font-size: 1.8rem;
-      cursor: pointer; }
+      cursor: pointer;
+      user-select: none; }
     .filter--category--option {
       display: flex;
       flex-direction: row;
@@ -594,7 +611,8 @@ body {
       .filter--category--option--name {
         font-weight: 500;
         font-size: 1.4rem;
-        cursor: pointer; }
+        cursor: pointer;
+        user-select: none; }
       .filter--category--option--checkbox {
         /*border: none;
                 background-color: $color-white-2;
@@ -620,15 +638,13 @@ body {
           content: "";
           position: absolute;
           display: none;
-          left: 9px;
-          top: 5px;
+          left: 50%;
+          top: 50%;
           width: 5px;
           height: 10px;
           border: solid white;
           border-width: 0 3px 3px 0;
-          -webkit-transform: rotate(45deg);
-          -ms-transform: rotate(45deg);
-          transform: rotate(45deg); }
+          transform: rotate(45deg) translate(-100%, -30%); }
     .filter--category--option + .filter--category--option {
       margin-top: 1rem; }
 
@@ -1151,8 +1167,9 @@ body {
   grid-row-gap: 4rem;
   grid-column-gap: 5rem;
   margin-bottom: 8rem;
-  margin-top: 4rem;
-  padding: 0 9rem; }
+  margin-top: 24rem;
+  padding: 0 9rem;
+  position: relative; }
   .hotels--item {
     display: flex;
     flex-direction: column;

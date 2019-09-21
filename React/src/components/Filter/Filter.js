@@ -31,7 +31,7 @@ export default props => {
     };
 
     return (
-        <div className="filter">
+        <div className={"filter" + (props.hotels ? " filter--hotels"  : "")}>
             <div className="filter--heading">
                 Filter by:
             </div>

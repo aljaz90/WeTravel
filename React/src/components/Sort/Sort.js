@@ -9,7 +9,7 @@ export default props => {
     }
 
     return (
-        <div className="sort">
+        <div className={"sort" + (props.hotels ? " sort--hotels"  : "")}>
             <div className="sort--title">
                 Sort by: 
             </div>

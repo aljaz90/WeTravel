@@ -15,7 +15,7 @@ export default props => {
           });
     };
 
-    setTimeout(closeNotification, 5000);
+    setTimeout(closeNotification, 10000);
 
     return (
         <div className="notification">
