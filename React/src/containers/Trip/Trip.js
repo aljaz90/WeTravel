@@ -10,13 +10,16 @@ import NotificationSystem from '../../components/NotificationSystem/Notification
 import VisibilitySensor from 'react-visibility-sensor';
 import Sort from '../../components/Sort/Sort';
 import Filter from '../../components/Filter/Filter';
+import Everywhere from '../../components/Everywhere/Everywhere';
 
 export default class Trip extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            query: {},
             loading: true,
+            everywhere: false,
             offers: [],
             offersDisplay: {
                 firstIndex: 0,
@@ -1141,25 +1144,37 @@ export default class Trip extends Component {
     componentDidMount() {
         let query = this.props.location.state;
         query.plane_cabin_class = query.plane_cabin_class.replace(" ", "").toLowerCase();
-
-        let cityPromise = new Promise((resolve, reject) => {
-            this.getAirports(query.from, query.to, resolve);
-        });
-
-        cityPromise.then(data => {
-            query['fromCode'] = data.from;
-            query['toCode'] = data.to;
-            setTimeout(() => this.search(query), 2000);
-        });
-
-        let hotelQuery = {
-            destination: query.to,
-            arrival_date: query.departing,
-            departure_date: query.arriving,
-            travelers: 1
-        }
         
-        //this.searchHotels(hotelQuery);
+        this.setState({
+            ...this.state,
+            everywhere: query.to === "Everywhere",
+            query
+        });
+        
+        if (query.to === "Everywhere") {
+            console.log("YAAY EVERYWHERE");
+        }
+        else {
+            let cityPromise = new Promise((resolve, reject) => {
+                this.getAirports(query.from, query.to, resolve);
+            });
+    
+            cityPromise.then(data => {
+                query['fromCode'] = data.from;
+                query['toCode'] = data.to;
+                setTimeout(() => this.search(query), 2000);
+            });
+    
+            let hotelQuery = {
+                destination: query.to,
+                arrival_date: query.departing,
+                departure_date: query.arriving,
+                travelers: 1
+            }
+            
+            //this.searchHotels(hotelQuery);
+        }
+
     }
 
     handleOnClickOffer = index => {
@@ -1269,10 +1284,6 @@ export default class Trip extends Component {
     handleOnOptionSelected = (sortingCategory, option, category) => {
         let filterCategory = category === "flights" ? this.state.offersDisplay.filters[sortingCategory.toLowerCase()] : this.state.hotelsDisplay.filters[sortingCategory.toLowerCase().replace(" ", "_")];
         
-        console.log(sortingCategory)
-        console.log(option)
-        console.log(category)
-        
         if (sortingCategory === "Airlines") {
             let index = filterCategory.indexOf(option);
             if (index === -1) {
@@ -1327,7 +1338,10 @@ export default class Trip extends Component {
 
     render() {
         if (this.props.location.state && this.props.location.state.ok) {
-            if (this.state.loading) {
+            if (this.state.everywhere) {
+                return <Everywhere />;
+            }
+            else if (this.state.loading) {
                 return <Loader />;
             }
             else if (this.state.isShowingSummary) {

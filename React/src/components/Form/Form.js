@@ -14,8 +14,6 @@ export default class Form extends Component {
     }
 
     handleOnValueChange = (name, value) => {
-        console.log(name+" - "+value)
-        console.log(this.state)
         let values = {...this.state.values};
         if (name === "deparingarriving") {
             values.departing = value.departing;

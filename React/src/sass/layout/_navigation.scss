@@ -41,6 +41,7 @@
             letter-spacing: 0.4rem;
             font-weight: 300;
             align-self: center;
+            user-select: none;
 
             &--heading {
                 color: $color-white;

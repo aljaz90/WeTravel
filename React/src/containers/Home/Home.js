@@ -79,7 +79,6 @@ class Home extends Component {
   }
 
   handleSelectPlace(event) {
-    //console.log(event.target.innerText.toLowerCase());
     this.setState({...this.state, selectedPlace: event.target.innerText.toLowerCase()});
   }
 
@@ -87,7 +86,6 @@ class Home extends Component {
     event.preventDefault();
     let departing = new Date(values.departing);
     let arriving = new Date(values.arriving);
-    console.log(values)
     if (!(departing < arriving) || values.from === values.to) {
       return;
     }
@@ -105,7 +103,6 @@ class Home extends Component {
   }
 
   formatMonth = month => {
-    //console.log(month)
     month = month + "";
     if (month.length > 1) {
       return month;

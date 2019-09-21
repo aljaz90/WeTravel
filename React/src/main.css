@@ -681,7 +681,8 @@ body {
       font-size: 3.2rem;
       letter-spacing: 0.4rem;
       font-weight: 300;
-      align-self: center; }
+      align-self: center;
+      user-select: none; }
       .nav--item--logo--heading {
         color: #fff;
         font-weight: 700;
