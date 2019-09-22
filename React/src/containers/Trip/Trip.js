@@ -705,7 +705,7 @@ export default class Trip extends Component {
         axios.get("https://cors-anywhere.herokuapp.com/https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query="+ from, config)
             .then(res => {
                 if (res.status === 200) {
-                    console.log(res)
+                    //console.log(res)
                     let from = res.data.Places[0].PlaceId;
                     axios.get("https://cors-anywhere.herokuapp.com/https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query="+ to, config)
                         .then(res2 => {
@@ -725,7 +725,6 @@ export default class Trip extends Component {
     }
 
     search = query => {
-        console.log(query)
         let body = {
             "originPlace": query.fromCode,
             "destinationPlace": query.toCode,
@@ -818,7 +817,7 @@ export default class Trip extends Component {
             offers.push(offer);
         });
         offers = offers.sort((a, b) => a.price - b.price);
-        this.setState({...this.state, offers})
+        this.setState({...this.state, offers});
         this.completed("flights");
     }
 
@@ -935,7 +934,7 @@ export default class Trip extends Component {
         axios.get("https://cors-anywhere.herokuapp.com/https://apidojo-booking-v1.p.rapidapi.com/locations/auto-complete", config)
         .then(res => {
             if (res.status === 200) {
-                console.log("BOOKING API - AOK")
+                //console.log("BOOKING API - AOK")
                 data.destination = res.data[0].dest_id;
                 let config = {
                     headers: {
@@ -963,7 +962,7 @@ export default class Trip extends Component {
                 
                 axios.get("https://cors-anywhere.herokuapp.com/https://apidojo-booking-v1.p.rapidapi.com/properties/list", config)
                 .then(res => {
-                    console.log(res)
+                    //console.log(res)
                     if (res.status === 200) {
                         this.parseHotels(res.data.result);
                     } else {
@@ -1050,8 +1049,6 @@ export default class Trip extends Component {
             hotels
         });
         this.completed("hotels");
-        console.log("Hotels")
-        console.log(hotels)
     }
 
     // OTHER
@@ -1066,7 +1063,6 @@ export default class Trip extends Component {
                     flights: true
                 }
             });
-            console.log("DONE 1");
         }
         else if (action === "hotels" && this.state.requests.flights) {
             this.setState({
@@ -1077,7 +1073,6 @@ export default class Trip extends Component {
                     hotels: true
                 }
             });
-            console.log("DONE 2");
         }
         else {
             this.setState({
@@ -1088,7 +1083,6 @@ export default class Trip extends Component {
                     [action]: true
                 }
             });
-            console.log("DONE 1/2");
         }
     }
 
@@ -1130,7 +1124,6 @@ export default class Trip extends Component {
         axios.get("https://currency-converter5.p.rapidapi.com/currency/historical/" + today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate(), config)
                 .then(res => {
                     if (res.status === 200) {
-                        console.log(res.data.rates[to].rate_for_amount)
                         return res.data.rates[to].rate_for_amount;
                     } 
                 })
@@ -1155,26 +1148,30 @@ export default class Trip extends Component {
             console.log("YAAY EVERYWHERE");
         }
         else {
-            let cityPromise = new Promise((resolve, reject) => {
-                this.getAirports(query.from, query.to, resolve);
-            });
-    
-            cityPromise.then(data => {
-                query['fromCode'] = data.from;
-                query['toCode'] = data.to;
-                setTimeout(() => this.search(query), 2000);
-            });
-    
-            let hotelQuery = {
-                destination: query.to,
-                arrival_date: query.departing,
-                departure_date: query.arriving,
-                travelers: 1
-            }
-            
-            //this.searchHotels(hotelQuery);
+            this.searchFlightsHotels(query);
         }
 
+    }
+
+    searchFlightsHotels = query => {
+      let cityPromise = new Promise((resolve, reject) => {
+        this.getAirports(query.from, query.to, resolve);
+      });
+
+      cityPromise.then(data => {
+          query['fromCode'] = data.from;
+          query['toCode'] = data.to;
+          setTimeout(() => this.search(query), 2000);
+      });
+
+      let hotelQuery = {
+          destination: query.to,
+          arrival_date: query.departing,
+          departure_date: query.arriving,
+          travelers: query.travelers
+      };
+
+      //this.searchHotels(hotelQuery);
     }
 
     handleOnClickOffer = index => {
@@ -1212,7 +1209,6 @@ export default class Trip extends Component {
     }
 
     getFlightDuration = flight => {
-        console.log(flight)
         return flight.outboundFlight.totalDuration + flight.inboundFlight.totalDuration;
     }
 
@@ -1336,10 +1332,23 @@ export default class Trip extends Component {
         
     }
 
+    handleOnDestinationSelected = (destination, country) => {
+      let query = {...this.state.query};
+      query.to = destination;
+
+      this.setState({
+        ...this.state,
+        everywhere: false,
+        query
+      });
+
+      this.searchFlightsHotels(query);
+    };
+
     render() {
         if (this.props.location.state && this.props.location.state.ok) {
             if (this.state.everywhere) {
-                return <Everywhere />;
+                return <Everywhere onDestinationSelected={this.handleOnDestinationSelected} from={this.state.query.from} />;
             }
             else if (this.state.loading) {
                 return <Loader />;
@@ -1390,14 +1399,14 @@ export default class Trip extends Component {
                         {
                             this.props.location.state && !this.props.location.state.ok ? <NotificationSystem location={this.props.location} history={this.props.history} /> : ""
                         }
-                        <div className="content content--trip" onScroll={() => console.log("SCROLL CALLED")}>
+                        <div className="content content--trip">
                             <section className="flights" >
                                 <Sort onChange={(opt) => this.handleSortChange(opt, "offers")} options={["cheapest", "fastest", "best"]} />
                                 <Filter onOptionSelected={(cat, opt) => this.handleOnOptionSelected(cat, opt, "flights")} categories={[{name: "Stops", options: ["direct", "up to 1", "up to 2"]}, {name: "Airlines", options: airlines}]} />
                                 {
                                     displayedFlights.map((offer, index) => {
                                     if (index === this.state.offersDisplay.lastIndex){
-                                        return (<VisibilitySensor onChange={(visible) => this.handleOnFlightVisibilityChange(visible, "flights")}>
+                                        return (<VisibilitySensor key={index} onChange={(visible) => this.handleOnFlightVisibilityChange(visible, "flights")}>
                                                     <Flight key={index} handleOnSelectFlight={(e) => this.handleOnSelectFlight(e, index)} open={this.state.openOffer === index} onClick={() => this.handleOnClickOffer(index)} cabinClass={this.props.location.state.plane_cabin_class} id={index} flight={offer} />
                                                 </VisibilitySensor>);
                                     }

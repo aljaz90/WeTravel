@@ -1283,6 +1283,24 @@ body {
         background: #fff;
         color: #777; }
 
+.everywhere--refresh {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: #ff502f;
+  padding: 1rem 2rem;
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 100;
+  font-family: "Raleway", sans-serif;
+  border-radius: 4px;
+  box-shadow: 0 0.6rem 2rem #777;
+  cursor: pointer;
+  transition: all .2s; }
+  .everywhere--refresh:hover {
+    transform: translate(-50%, -0.5rem); }
+
 .test {
   display: flex;
   flex-flow: column;

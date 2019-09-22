@@ -15,6 +15,13 @@ export default class Input extends Component {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
 
+        if (inputLength === 0 && this.props.id === "to") {
+            return [{name: "Everywhere", data: "everywhere"}]
+        }
+        else if (inputLength === 0 && this.props.data.length > 10) {
+            return [];
+        }
+
         return inputLength === 0 ? [...this.props.data] : this.props.data.filter(value =>
             value.name.toLowerCase().slice(0, inputLength) === inputValue
         );

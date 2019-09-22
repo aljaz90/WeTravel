@@ -66,10 +66,6 @@ export default props => {
                 }
             }
         }
-
-        console.log("DATES")
-        console.log(dates)
-
         return dates;
     };
 
@@ -115,7 +111,7 @@ export default props => {
 
         return (
             <div onMouseEnter={() => toggleCalendar(true)} onMouseLeave={() => toggleCalendar(false)} className="date-picker date-picker--range">
-                <input required placeholder={props.placeholder} value={selectedDate} type="text" className="date-picker--input" />
+                <input required readOnly placeholder={props.placeholder} value={selectedDate} type="text" className="date-picker--input" />
                 <FontAwesomeIcon className="date-picker--icon" icon={faCalendar} />
                 { showingCalendar ? 
                 <div className="date-picker--calendar">
@@ -138,6 +134,7 @@ export default props => {
                     <div className="date-picker--calendar--calendar">
                         {getDatesInMonth().map(date => {
                                     return( <div 
+                                                key={date.date}
                                                 onClick={(e) => !date.disabled ? handleSelectDate(date.date) : null} 
                                                 className={"date-picker--calendar--calendar--date" + 
                                                     (date.disabled ? " date-picker--calendar--calendar--date--disabled" : "") + 
@@ -148,7 +145,7 @@ export default props => {
                     </div>
                 </div> : ""
                 }
-                <input required placeholder={props.placeholder2} value={selectedDate2} type="text" className="date-picker--input date-picker--input--range" />
+                <input required readOnly placeholder={props.placeholder2} value={selectedDate2} type="text" className="date-picker--input date-picker--input--range" />
                 <FontAwesomeIcon className="date-picker--icon date-picker--icon--range" icon={faCalendar} />
             </div>
         );
@@ -156,7 +153,7 @@ export default props => {
 
     return (
         <div onMouseEnter={() => toggleCalendar(true)} onMouseLeave={() => toggleCalendar(false)} className="date-picker">
-            <input placeholder={props.placeholder} value={selectedDate} type="text" className="date-picker--input" />
+            <input required readOnly placeholder={props.placeholder} value={selectedDate} type="text" className="date-picker--input" />
             <FontAwesomeIcon className="date-picker--icon" icon={faCalendar} />
             { showingCalendar ? 
             <div className="date-picker--calendar">

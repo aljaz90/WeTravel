@@ -41,7 +41,7 @@ export default props => {
                 {       selectedCategories.includes(category.name) ? 
                             category.options.map(option => (
                                 <div onClick={() => selectOption(option, category.name)} className="filter--category--option">
-                                    <input id={category.name+option} className="filter--category--option--checkbox"  type="checkbox" checked={selectedOptions.includes(option)} />
+                                    <input readOnly id={category.name+option} className="filter--category--option--checkbox"  type="checkbox" checked={selectedOptions.includes(option)} />
                                     <span className="filter--category--option--checkbox-custom"></span>
                                     <div className="filter--category--option--name">{option}</div>
                                 </div>
