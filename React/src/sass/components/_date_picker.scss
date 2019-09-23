@@ -130,6 +130,7 @@
                 justify-content: center;
                 align-items: center;
                 font-size: 1.6rem; 
+                position: relative;
 
                 &:hover, &--selected {
                     background-color: $color-white;
@@ -140,6 +141,21 @@
                     //background-color: $color-grey-2;
                     opacity: 0.4;
                     cursor: default;
+                }
+
+                &--begin, &--end {
+                    font-size: 2rem;
+                    position: absolute;
+                }
+
+                &--begin {
+                    right: 0;
+                    transform: translateX(-50%);
+                }
+
+                &--end {
+                    left: 0;
+                    transform: translateX(50%);
                 }
             }
         }

@@ -33,10 +33,20 @@ export default class Input extends Component {
 
         if (suggestion.data === "everywhere") {
             return (
-                    <div className="react-autosuggest__suggestion--container react-autosuggest__suggestion--important">
-                            {suggestion.name}
-                    </div>
-                    );
+                <div className="react-autosuggest__suggestion--container react-autosuggest__suggestion--important">
+                        {suggestion.name}
+                </div>
+            );
+        }
+        else if (this.props.id === "to" || this.props.id === "from") {
+            return (
+                <div className="react-autosuggest__suggestion--container">
+                        {suggestion.name}
+                        <div className="react-autosuggest__suggestion--country">
+                            {suggestion.country}
+                        </div>
+                </div>
+            );
         }
         return (<div className="react-autosuggest__suggestion--container">
                     {suggestion.name}

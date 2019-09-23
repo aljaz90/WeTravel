@@ -294,6 +294,13 @@
     display: none;
 }
 
+.react-autosuggest__suggestion--country {
+    color: $color-grey-2;
+    font-size: 1.2rem;
+    font-family: $font-heading;
+    font-weight: 400;
+}
+
 .react-autosuggest__suggestions-container--open {
     display: block;
     position: absolute;

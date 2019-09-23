@@ -1,0 +1,3 @@
+default: { stroke: marker.origin ? "cyan" : "#ff502f", fontSize: marker.origin ? "0rem" : "0rem", transition: 'all .3s' },
+hover: { stroke: "#32dbc6", fontSize: marker.origin ? "0rem" : "1.6rem", transition: 'all .3s' },
+pressed: { stroke: marker.origin ? "cyan" : "#49beb7", fontSize: marker.origin ? "0rem" : "1.6rem", transition: 'all .3s' },

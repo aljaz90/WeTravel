@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight, faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faCalendar, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -110,7 +110,7 @@ export default props => {
         let endDate = new Date(selectedDate2);
 
         return (
-            <div onMouseEnter={() => toggleCalendar(true)} onMouseLeave={() => toggleCalendar(false)} className="date-picker date-picker--range">
+            <div onMouseEnter={() => toggleCalendar(true)} onMouseLeave={() => toggleCalendar(true)} className="date-picker date-picker--range">
                 <input required readOnly placeholder={props.placeholder} value={selectedDate} type="text" className="date-picker--input" />
                 <FontAwesomeIcon className="date-picker--icon" icon={faCalendar} />
                 { showingCalendar ? 
@@ -140,6 +140,8 @@ export default props => {
                                                     (date.disabled ? " date-picker--calendar--calendar--date--disabled" : "") + 
                                                     ((((new Date(date.date) >= beginDate) && (new Date(date.date) <= endDate)) || date.date === (selectedDate2 || selectedDate) ) ? " date-picker--calendar--calendar--date--selected" : "")}>
                                                     { date.date.split("-")[2]}
+                                                    { date.date === selectedDate ? <FontAwesomeIcon className="date-picker--calendar--calendar--date--begin" icon={faChevronRight} /> : null }
+                                                    { date.date === selectedDate2 ? <FontAwesomeIcon className="date-picker--calendar--calendar--date--end" icon={faChevronLeft} /> : null }
                                             </div>);
                                 })}              
                     </div>

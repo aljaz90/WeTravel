@@ -282,6 +282,12 @@ body {
 .react-autosuggest__suggestions-container {
   display: none; }
 
+.react-autosuggest__suggestion--country {
+  color: #777;
+  font-size: 1.2rem;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400; }
+
 .react-autosuggest__suggestions-container--open {
   display: block;
   position: absolute;
@@ -491,13 +497,23 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 1.6rem; }
+        font-size: 1.6rem;
+        position: relative; }
         .date-picker--calendar--calendar--date:hover, .date-picker--calendar--calendar--date--selected {
           background-color: #fff;
           color: #777; }
         .date-picker--calendar--calendar--date--disabled {
           opacity: 0.4;
           cursor: default; }
+        .date-picker--calendar--calendar--date--begin, .date-picker--calendar--calendar--date--end {
+          font-size: 2rem;
+          position: absolute; }
+        .date-picker--calendar--calendar--date--begin {
+          right: 0;
+          transform: translateX(-50%); }
+        .date-picker--calendar--calendar--date--end {
+          left: 0;
+          transform: translateX(50%); }
 
 .notification {
   display: flex;
@@ -1282,6 +1298,10 @@ body {
       .summary--details--book:hover {
         background: #fff;
         color: #777; }
+
+.everywhere--marker {
+  width: 10rem;
+  height: 10rem; }
 
 .everywhere--refresh {
   position: absolute;
