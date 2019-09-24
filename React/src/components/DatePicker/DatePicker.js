@@ -47,21 +47,15 @@ export default props => {
 
         for (let i = 1; i<32; i++) {
             let newDate = new Date(`${currentDate.getFullYear()}-${formatDate(currentDate.getMonth()+1)}-${formatDate(i)}`);
-            console.log(newDate)
-            if (isNaN(newDate.getDate())) {
+            if (isNaN(newDate.getDate()) || currentDate.getMonth() !== newDate.getMonth()) {
                 break;
             }
             dates.push({ date: `${newDate.getFullYear()}-${formatDate(newDate.getMonth()+1)}-${formatDate(i)}`, disabled: (today > newDate) || (newDate > maxDate), day: newDate.getDay() === 0 ? 7 : newDate.getDay() });
         }
-
         
-        console.log(dates)
-        /*let lastDate = new Date(dates[dates.length-1].date);
+        let lastDate = new Date(dates[dates.length-1].date);
         if (lastDate.getDay() !== 0) {
             let additionalDays = 7 - lastDate.getDay();
-            console.log(lastDate)
-            console.log("DAY " + lastDate.getDay())
-            console.log("ADDD " + additionalDays)
             for (let i = 1; i<=additionalDays; i++){
                 let additionalDate = new Date(`${lastDate.getMonth() === 11 ? lastDate.getFullYear()+1 : lastDate.getFullYear()}-${lastDate.getMonth() === 11 ? "01" : formatDate(lastDate.getMonth()+2)}-${formatDate(i)}`);
                 if (!isNaN(additionalDate.getDate())) {
@@ -69,7 +63,6 @@ export default props => {
                 }
             }
         }
-        console.log(dates)*/
         return dates;
     };
 
@@ -137,7 +130,6 @@ export default props => {
                     </div>
                     <div className="date-picker--calendar--calendar">
                         {getDatesInMonth().map(date => {
-                                    console.log(date.date)
                                     return( <div 
                                                 key={date.date}
                                                 onClick={(e) => !date.disabled ? handleSelectDate(date.date) : null} 

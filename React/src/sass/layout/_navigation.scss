@@ -11,6 +11,40 @@
     left: 0;
     box-shadow: 0 0 .4rem rgba(0,0,0, 0.8);
     z-index: 999;
+    min-height: 6.68rem;
+
+    &--dropdown--input {
+        display: none;
+    }
+    
+    &--dropdown--toggle {
+        display: none;
+
+        @include respond(tab-port) {
+            display: block;
+            width: 5rem;
+            height: 5rem;
+            background-color: red;
+        }
+    }
+
+    &--dropdown--input:checked + &--dropdown--toggle {
+        background-color: green;
+    }
+
+    &--dropdown--input:checked ~ &--items {
+        display: flex;
+    }
+
+    &--items {
+        display: flex;
+        flex-direction: row;
+
+        @include respond(tab-port) {
+            display: none;
+            flex-direction: column;
+        }
+    }
 
     &--item {
         font-size: 2.1rem;

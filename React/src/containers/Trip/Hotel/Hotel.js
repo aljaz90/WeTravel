@@ -64,10 +64,13 @@ export default props => {
           }
         });
     });
+
+    let image_name =  props.hotel.image_url.split("/")[props.hotel.image_url.split("/").length-1].substring(0, props.hotel.image_url.split("/")[props.hotel.image_url.split("/").length-1].indexOf("?"))
+    let url = `https://r-cf.bstatic.com/images/hotel/max1024x768/${image_name.substring(0, 3)}/${image_name}`;
   
   return (
     <div className="hotels--item">
-      <div style={{backgroundImage: `url(${props.hotel.image_url})`}} className="hotels--item--image"></div>
+      <div style={{backgroundImage: `url(${url})`}} className="hotels--item--image"></div>
       <div className="hotels--item--name">
         {props.hotel.name}
       </div>
