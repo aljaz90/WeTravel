@@ -21,10 +21,45 @@
         display: none;
 
         @include respond(tab-port) {
-            display: block;
+            display: flex;
+            height: 6.67rem;
             width: 5rem;
-            height: 5rem;
-            background-color: red;
+            cursor: pointer;
+        }
+
+        &--icon {
+            width: 5rem;
+            height: .5rem;
+            background-color: $color-white;
+            align-self: center;
+            transition: all .2s;
+            display: inline-block;
+
+            &::before, &::after {
+                content: "";
+                width: 5rem;
+                height: .5rem;
+                background-color: $color-white;
+                position: absolute;
+                display: inline-block;
+                transition: all .2s;
+            }
+
+            &::before {
+                top: 1.7rem;
+            }
+
+            &::after {
+                bottom: 1.7rem;
+            }
+        }
+
+        &:hover &--icon::before {
+            top: 1rem; 
+        }
+        
+        &:hover &--icon::after {
+            bottom: 1rem; 
         }
     }
 

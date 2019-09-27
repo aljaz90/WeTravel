@@ -10,7 +10,9 @@ export default props => {
           <div className="nav--item--logo"><h1 className="nav--item--logo--heading">We Travel <FontAwesomeIcon icon={faMapMarkedAlt} /></h1></div>
           <div className="nav--divider"></div>
           <input type="checkbox" id="dropdown" className="nav--dropdown--input" />
-          <label htmlFor="dropdown" className="nav--dropdown--toggle" />
+          <label htmlFor="dropdown" className="nav--dropdown--toggle">
+            <span className="nav--dropdown--toggle--icon"></span>
+          </label>
           <div className="nav--items">
             <div className="nav--item"><HashLink scroll={el => {el.scrollIntoView({ behavior: 'smooth', block: 'end' });}} smooth to="/#top">Home</HashLink></div>
             <div className="nav--item"><Link to="/">About Us</Link></div>

@@ -720,10 +720,33 @@ body {
     display: none; }
     @media only screen and (max-width: 56.25em) {
       .nav--dropdown--toggle {
-        display: block;
+        display: flex;
+        height: 6.67rem;
         width: 5rem;
-        height: 5rem;
-        background-color: red; } }
+        cursor: pointer; } }
+    .nav--dropdown--toggle--icon {
+      width: 5rem;
+      height: .5rem;
+      background-color: #fff;
+      align-self: center;
+      transition: all .2s;
+      display: inline-block; }
+      .nav--dropdown--toggle--icon::before, .nav--dropdown--toggle--icon::after {
+        content: "";
+        width: 5rem;
+        height: .5rem;
+        background-color: #fff;
+        position: absolute;
+        display: inline-block;
+        transition: all .2s; }
+      .nav--dropdown--toggle--icon::before {
+        top: 1.7rem; }
+      .nav--dropdown--toggle--icon::after {
+        bottom: 1.7rem; }
+    .nav--dropdown--toggle:hover .nav--dropdown--toggle--icon::before {
+      top: 1rem; }
+    .nav--dropdown--toggle:hover .nav--dropdown--toggle--icon::after {
+      bottom: 1rem; }
   .nav--dropdown--input:checked + .nav--dropdown--toggle {
     background-color: green; }
   .nav--dropdown--input:checked ~ .nav--items {
