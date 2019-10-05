@@ -55,6 +55,11 @@
     grid-row-gap: 2rem;
     margin-top: 4rem;
     margin-bottom: 8rem;
+    
+    @include respond(tab-land) {
+        position: relative;
+        margin-top: 16rem;
+    }
 
     &--item {
         display: flex;

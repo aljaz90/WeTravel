@@ -968,7 +968,8 @@ export default class Everywhere extends Component {
     this.setState({
       ...this.state,
       destinations,
-      markers
+      markers,
+      zoom: 1
     });
   }
 
@@ -1015,11 +1016,36 @@ export default class Everywhere extends Component {
     });
   }
 
+  handleOnZoom = (zoomBy, e) => {
+    if (e.deltaY > 0) {
+      if (this.state.zoom-zoomBy < 1) return;
+      this.setState({
+        ...this.state,
+        zoom: this.state.zoom-zoomBy
+      });
+    }
+    else if (e.deltaY < 0) {
+      if (this.state.zoom+zoomBy > 4) return;
+      this.setState({
+        ...this.state,
+        zoom: this.state.zoom+zoomBy
+      });
+    }
+    else {
+      if (this.state.zoom+zoomBy > 4) return;
+      this.setState({
+        ...this.state,
+        zoom: this.state.zoom+zoomBy
+      });
+    }
+  }
+
   render() {
+      console.log(this.state.zoom)
       return (
           <React.Fragment>
 
-            <div style={wrapperStyles}>
+            <div style={wrapperStyles} onWheel={(e) => this.handleOnZoom(1, e)} onDoubleClick={(e) => this.handleOnZoom(1, e)}>
               <ComposableMap
                 projectionConfig={{
                   scale: 205,
@@ -1032,7 +1058,7 @@ export default class Everywhere extends Component {
                   height: "auto",
                 }}
                 >
-                <ZoomableGroup center={[0,20]} disablePanning>
+                <ZoomableGroup center={[0,20]} zoom={this.state.zoom} disablePanning={false}>
                   <Geographies geography="/maps/world-50m.json">
                     {(geographies, projection) => geographies.map((geography, i) => geography.id !== "ATA" && (
                       <Geography

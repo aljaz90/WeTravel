@@ -22,7 +22,11 @@ export default props => {
     let [selectedDate, setSelectedDate] = useState("");
     let [selectedDate2, setSelectedDate2] = useState("");
     
-    let toggleCalendar = show => {
+    let toggleCalendar = (show=null) => {
+        if (show===null) {
+            setShowCalendar(!showingCalendar);
+            return;
+        }
         setShowCalendar(show);
     };
 
@@ -108,15 +112,15 @@ export default props => {
 
         return (
             <div onMouseEnter={() => toggleCalendar(true)} onMouseLeave={() => toggleCalendar(false)} className="date-picker date-picker--range">
-                <input required readOnly placeholder={props.placeholder} value={selectedDate} type="text" className="date-picker--input" />
-                <FontAwesomeIcon className="date-picker--icon" icon={faCalendar} />
+                <input onClick={() => toggleCalendar()} required readOnly placeholder={props.placeholder} value={selectedDate} type="text" className="date-picker--input" />
+                <FontAwesomeIcon onClick={() => toggleCalendar()} className="date-picker--icon" icon={faCalendar} />
                 { showingCalendar ? 
                 <div className="date-picker--calendar">
                     <div className="date-picker--calendar--header">
                         <div className="date-picker--calendar--header--nav">
-                            <FontAwesomeIcon onClick={() => handleChangeCurrentDate(false)} className="date-picker--calendar--header--nav--leftArr" icon={faArrowLeft} />
+                            <FontAwesomeIcon onClick={(e) => handleChangeCurrentDate(false)} className="date-picker--calendar--header--nav--leftArr" icon={faArrowLeft} />
                             <div className="date-picker--calendar--header--nav--heading">{monthNames[currentDate.getMonth()] + " " + currentDate.getFullYear()}</div>
-                            <FontAwesomeIcon onClick={() => handleChangeCurrentDate(true)} className="date-picker--calendar--header--nav--rightArr" icon={faArrowRight} />
+                            <FontAwesomeIcon onClick={(e) => handleChangeCurrentDate(true)} className="date-picker--calendar--header--nav--rightArr" icon={faArrowRight} />
                         </div>
                         <div className="date-picker--calendar--header--days">
                             <div className="date-picker--calendar--header--days--item">Mon</div>
@@ -144,8 +148,8 @@ export default props => {
                     </div>
                 </div> : ""
                 }
-                <input required readOnly placeholder={props.placeholder2} value={selectedDate2} type="text" className="date-picker--input date-picker--input--range" />
-                <FontAwesomeIcon className="date-picker--icon date-picker--icon--range" icon={faCalendar} />
+                <input onClick={() => toggleCalendar()} required readOnly placeholder={props.placeholder2} value={selectedDate2} type="text" className="date-picker--input date-picker--input--range" />
+                <FontAwesomeIcon onClick={() => toggleCalendar()} className="date-picker--icon date-picker--icon--range" icon={faCalendar} />
             </div>
         );
     }

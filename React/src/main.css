@@ -629,6 +629,17 @@ body {
   transform: translate(4rem, 0);
   border-radius: 4px;
   align-items: center; }
+  @media only screen and (max-width: 75em) {
+    .filter {
+      top: -14rem;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 100%;
+      min-height: 12rem;
+      padding: 2rem;
+      flex-direction: row;
+      justify-content: space-around;
+      z-index: 999; } }
   .filter--hotels {
     top: -14rem;
     left: 50%;
@@ -723,14 +734,19 @@ body {
         display: flex;
         height: 6.67rem;
         width: 5rem;
-        cursor: pointer; } }
+        cursor: pointer;
+        align-self: center;
+        position: absolute;
+        right: 4rem;
+        top: 0rem; } }
     .nav--dropdown--toggle--icon {
       width: 5rem;
       height: .5rem;
       background-color: #fff;
       align-self: center;
-      transition: all .2s;
-      display: inline-block; }
+      transition: all .3s;
+      display: inline-block;
+      position: relative; }
       .nav--dropdown--toggle--icon::before, .nav--dropdown--toggle--icon::after {
         content: "";
         width: 5rem;
@@ -747,8 +763,14 @@ body {
       top: 1rem; }
     .nav--dropdown--toggle:hover .nav--dropdown--toggle--icon::after {
       bottom: 1rem; }
-  .nav--dropdown--input:checked + .nav--dropdown--toggle {
-    background-color: green; }
+  .nav--dropdown--input:checked + .nav--dropdown--toggle .nav--dropdown--toggle--icon {
+    transform: rotate(45deg); }
+  .nav--dropdown--input:checked + .nav--dropdown--toggle .nav--dropdown--toggle--icon::before {
+    transform: rotate(-180deg);
+    top: 0; }
+  .nav--dropdown--input:checked + .nav--dropdown--toggle .nav--dropdown--toggle--icon::after {
+    transform: rotate(270deg);
+    bottom: 0; }
   .nav--dropdown--input:checked ~ .nav--items {
     display: flex; }
   .nav--items {
@@ -1184,6 +1206,10 @@ body {
   grid-row-gap: 2rem;
   margin-top: 4rem;
   margin-bottom: 8rem; }
+  @media only screen and (max-width: 75em) {
+    .flights {
+      position: relative;
+      margin-top: 16rem; } }
   .flights--item {
     display: flex;
     flex-direction: row;
