@@ -8,6 +8,10 @@
         width: 72rem;
         background-color: $color-white; 
         border-radius: 2px;
+
+        @include respond(phone) {
+            width: 100vw;
+        }
     }
 
     &--icon {
@@ -18,10 +22,18 @@
         bottom: 0;
         transform: translate(-15%, -20%);
 
+        @include respond(phone) {
+            transform: translate(-60%, -20%);
+        }
+
         &--range {
             right: unset;
             left: 0;
             transform: translate(30rem, -20%);
+
+            @include respond(phone) {
+                transform: translate(27rem, -20%);
+            }
         }
     }
 
@@ -35,6 +47,10 @@
 
         &--range {
             width: 35rem;
+
+            @include respond(phone) {
+                width: 100%;
+            }
         }
     }
 

@@ -295,6 +295,12 @@
     border: none;
     border-radius: 2px;
     width: 35rem;
+
+    @include respond(phone) {
+        &:not(:last-child) {
+            margin-bottom: 3rem;
+        }
+    }
 }
 
 .react-autosuggest__input--focused {
@@ -376,6 +382,10 @@
         color: $color-grey-2;
         user-select: none;
 
+        @include respond(phone) {
+            width: 90vw; 
+        }
+
         &--open {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
@@ -436,6 +446,10 @@
         display: flex;
         flex-direction: row;
         overflow: hidden;
+
+        @include respond(phone) {
+            width: 95vw; 
+        }
 
         &--item {
             padding: 1rem 0rem;

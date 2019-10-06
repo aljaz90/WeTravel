@@ -502,6 +502,10 @@
             display: flex;
             flex-direction: row;
 
+            @include respond(phone) {
+                flex-direction: column;
+            }
+
             &--icon {
                 color: $color-primary;
                 position: absolute;

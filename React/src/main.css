@@ -307,6 +307,9 @@ body {
   border: none;
   border-radius: 2px;
   width: 35rem; }
+  @media only screen and (max-width: 37.5em) {
+    .react-autosuggest__input:not(:last-child) {
+      margin-bottom: 3rem; } }
 
 .react-autosuggest__input--focused {
   outline: none; }
@@ -371,6 +374,9 @@ body {
   background-color: #fff;
   color: #777;
   user-select: none; }
+  @media only screen and (max-width: 37.5em) {
+    .input--dropdown {
+      width: 90vw; } }
   .input--dropdown--open {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0; }
@@ -417,6 +423,9 @@ body {
   display: flex;
   flex-direction: row;
   overflow: hidden; }
+  @media only screen and (max-width: 37.5em) {
+    .input--number {
+      width: 95vw; } }
   .input--number--item {
     padding: 1rem 0rem;
     width: 100%;
@@ -533,6 +542,9 @@ body {
     width: 72rem;
     background-color: #fff;
     border-radius: 2px; }
+    @media only screen and (max-width: 37.5em) {
+      .date-picker--range {
+        width: 100vw; } }
   .date-picker--icon {
     font-size: 4rem;
     color: #ff502f;
@@ -540,10 +552,16 @@ body {
     right: 0;
     bottom: 0;
     transform: translate(-15%, -20%); }
+    @media only screen and (max-width: 37.5em) {
+      .date-picker--icon {
+        transform: translate(-60%, -20%); } }
     .date-picker--icon--range {
       right: unset;
       left: 0;
       transform: translate(30rem, -20%); }
+      @media only screen and (max-width: 37.5em) {
+        .date-picker--icon--range {
+          transform: translate(27rem, -20%); } }
   .date-picker--input {
     width: 100%;
     font-size: 2.6rem;
@@ -553,6 +571,9 @@ body {
     border-radius: 2px; }
     .date-picker--input--range {
       width: 35rem; }
+      @media only screen and (max-width: 37.5em) {
+        .date-picker--input--range {
+          width: 100%; } }
   .date-picker--calendar {
     position: absolute;
     bottom: 0;
@@ -813,6 +834,9 @@ body {
   box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.8);
   z-index: 999;
   min-height: 6.68rem; }
+  @media only screen and (max-width: 37.5em) {
+    .nav {
+      padding: 0rem 1rem; } }
   .nav--dropdown--input {
     display: none; }
   .nav--dropdown--toggle {
@@ -1226,6 +1250,9 @@ body {
       position: relative;
       display: flex;
       flex-direction: row; }
+      @media only screen and (max-width: 37.5em) {
+        .createatrip--form--input-group {
+          flex-direction: column; } }
       .createatrip--form--input-group--icon {
         color: #32dbc6;
         position: absolute;
