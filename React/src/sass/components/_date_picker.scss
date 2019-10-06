@@ -10,7 +10,8 @@
         border-radius: 2px;
 
         @include respond(phone) {
-            width: 100vw;
+            width: 100%;
+            flex-direction: column;
         }
     }
 
@@ -45,11 +46,15 @@
         border: none;
         border-radius: 2px;
 
+        @include respond(phone) {
+            width: 80%;
+        }
+
         &--range {
             width: 35rem;
 
             @include respond(phone) {
-                width: 100%;
+                width: 80%;
             }
         }
     }

@@ -544,7 +544,8 @@ body {
     border-radius: 2px; }
     @media only screen and (max-width: 37.5em) {
       .date-picker--range {
-        width: 100vw; } }
+        width: 100%;
+        flex-direction: column; } }
   .date-picker--icon {
     font-size: 4rem;
     color: #ff502f;
@@ -569,11 +570,14 @@ body {
     padding: 1rem 2rem;
     border: none;
     border-radius: 2px; }
+    @media only screen and (max-width: 37.5em) {
+      .date-picker--input {
+        width: 80%; } }
     .date-picker--input--range {
       width: 35rem; }
       @media only screen and (max-width: 37.5em) {
         .date-picker--input--range {
-          width: 100%; } }
+          width: 80%; } }
   .date-picker--calendar {
     position: absolute;
     bottom: 0;

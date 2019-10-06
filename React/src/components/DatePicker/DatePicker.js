@@ -98,6 +98,7 @@ export default props => {
             else {
                 setSelectedDate2(date);
                 props.onChanged("arriving", date);
+                setShowCalendar(false);
             }
         } else {
             setSelectedDate(date);
