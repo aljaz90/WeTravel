@@ -355,3 +355,122 @@
 .react-autosuggest__suggestion--highlighted {
     background-color: #ddd;
 }
+
+.input {
+    &--label {
+        position: absolute;
+        top: -3rem;
+        left: .5rem;
+        font-size: 1.6rem;
+        color: $color-white;
+    }
+
+    &--dropdown {
+        font-size: 2.6rem;
+        font-family: "Quicksand", sans-serif;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 2px;
+        width: 35rem;
+        background-color: $color-white;
+        color: $color-grey-2;
+        user-select: none;
+
+        &--open {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        &--button {
+            cursor: pointer;
+        }
+
+        &--icon {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            cursor: pointer;
+        }
+        &--items {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+            width: 100%;
+            padding-top: .5rem;
+            transition: all .3s;
+            display: none;
+            background-color: $color-white-2;
+            z-index: 50;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+
+            &--open {
+                display: block;
+            }
+        }
+        &--item {
+            cursor: pointer;
+            transition: all .2s;
+            padding: 1rem 2rem;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid rgba($color-grey-2, .7);
+            }
+
+            &:hover {
+                background-color: $color-white;
+            }
+        }
+    }
+
+    &--number {
+        font-size: 2.6rem;
+        font-family: "Quicksand", sans-serif;
+        border: none;
+        border-radius: 2px;
+        width: 50rem;
+        background-color: $color-white;
+        color: $color-grey-2;
+        user-select: none;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+
+        &--item {
+            padding: 1rem 0rem;
+            width: 100%;
+            transition: all .2s;
+            text-align: center;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $color-white-2;
+            }
+
+            &--selected {
+                color: $color-white;
+                background-color: $color-secondary !important;
+            }
+
+            &:not(:last-child) {
+                border-right: 1px solid rgba($color-grey-2, .7);
+            }
+
+            &--input {
+                width: 20%;
+                border: none;
+                padding: 1rem 1rem;
+                font-size: 2.6rem;
+                font-weight: 100;
+                font-family: "Quicksand", sans-serif;
+                color: $color-grey-2;
+
+                &:invalid {
+                    outline: none;
+                    color: red;
+                }
+            }
+        }
+    }
+}

@@ -354,6 +354,94 @@ body {
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd; }
 
+.input--label {
+  position: absolute;
+  top: -3rem;
+  left: .5rem;
+  font-size: 1.6rem;
+  color: #fff; }
+
+.input--dropdown {
+  font-size: 2.6rem;
+  font-family: "Quicksand", sans-serif;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 2px;
+  width: 35rem;
+  background-color: #fff;
+  color: #777;
+  user-select: none; }
+  .input--dropdown--open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0; }
+  .input--dropdown--button {
+    cursor: pointer; }
+  .input--dropdown--icon {
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    cursor: pointer; }
+  .input--dropdown--items {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    width: 100%;
+    padding-top: .5rem;
+    transition: all .3s;
+    display: none;
+    background-color: #f4f4f4;
+    z-index: 50;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px; }
+    .input--dropdown--items--open {
+      display: block; }
+  .input--dropdown--item {
+    cursor: pointer;
+    transition: all .2s;
+    padding: 1rem 2rem; }
+    .input--dropdown--item:not(:last-child) {
+      border-bottom: 1px solid rgba(119, 119, 119, 0.7); }
+    .input--dropdown--item:hover {
+      background-color: #fff; }
+
+.input--number {
+  font-size: 2.6rem;
+  font-family: "Quicksand", sans-serif;
+  border: none;
+  border-radius: 2px;
+  width: 50rem;
+  background-color: #fff;
+  color: #777;
+  user-select: none;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden; }
+  .input--number--item {
+    padding: 1rem 0rem;
+    width: 100%;
+    transition: all .2s;
+    text-align: center;
+    cursor: pointer; }
+    .input--number--item:hover {
+      background-color: #f4f4f4; }
+    .input--number--item--selected {
+      color: #fff;
+      background-color: #ff502f !important; }
+    .input--number--item:not(:last-child) {
+      border-right: 1px solid rgba(119, 119, 119, 0.7); }
+    .input--number--item--input {
+      width: 20%;
+      border: none;
+      padding: 1rem 1rem;
+      font-size: 2.6rem;
+      font-weight: 100;
+      font-family: "Quicksand", sans-serif;
+      color: #777; }
+      .input--number--item--input:invalid {
+        outline: none;
+        color: red; }
+
 .loader {
   position: fixed;
   top: 0;
@@ -1112,8 +1200,9 @@ body {
 .createatrip {
   grid-row: 4 / 5;
   grid-column: full-start / full-end;
-  background-color: #f4f4f4;
-  background-image: linear-gradient(to bottom, #457fca, #5691c8);
+  background-image: linear-gradient(to bottom, rgba(69, 127, 202, 0.7), rgba(86, 145, 200, 0.7)), url("/img/plane.jpg");
+  background-size: cover;
+  background-position: top;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1134,22 +1223,35 @@ body {
       .createatrip--form {
         width: 100vw !important; } }
     .createatrip--form--input-group {
-      position: relative; }
-      .createatrip--form--input-group--label {
+      position: relative;
+      display: flex;
+      flex-direction: row; }
+      .createatrip--form--input-group--icon {
+        color: #32dbc6;
         position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translate(-15rem, -2.2rem);
-        font-size: 1.6rem;
-        font-weight: 100;
-        transition: all .4s ease-in-out; }
+        bottom: 0;
+        font-size: 4rem;
+        transition: all .2s; }
+        .createatrip--form--input-group--icon--1 {
+          left: 0;
+          transform: translate(-7rem, 0); }
+          .createatrip--form--input-group--icon--1:hover {
+            transform: translate(-7rem, 0) scale(1.3); }
+          @media only screen and (max-width: 56.25em) {
+            .createatrip--form--input-group--icon--1 {
+              margin-bottom: 3rem; } }
+        .createatrip--form--input-group--icon--2 {
+          right: 0;
+          transform: translate(7rem, 0); }
+          .createatrip--form--input-group--icon--2:hover {
+            transform: translate(7rem, 0) scale(1.3); }
       .createatrip--form--input-group--input {
         font-size: 3.1rem;
         padding: 1rem 2rem;
         border: none;
         border-radius: 4px; }
       .createatrip--form--input-group:not(:last-child) {
-        padding-bottom: 2rem; }
+        padding-bottom: 3.5rem; }
 
 .footer {
   grid-row: 5 / 6;

@@ -46,7 +46,9 @@ export default class Trip extends Component {
                     }
                 }
             },
-            responseData: {},
+            responseData: {
+              Carriers: []
+            },
             openOffer: null,
             openHotel: null,
             selectedOffer: null,
@@ -59,7 +61,7 @@ export default class Trip extends Component {
             }
         };
 
-        this.state.hotels = [
+        /*this.state.hotels = [
             {
               "name": "plat hostel keikyu asakusa karin",
               "is_city_center": 0,
@@ -690,7 +692,7 @@ export default class Trip extends Component {
                 "cleanliness": 9.2
               }
             }
-          ];
+          ];*/
     }
 
     // FLIGHT SEARCH
@@ -1077,7 +1079,7 @@ export default class Trip extends Component {
         else {
             this.setState({
                 ...this.state,
-                loading: false, // DEV
+                loading: true, // DEV
                 requests: {
                     ...this.state.requests,
                     [action]: true
@@ -1171,7 +1173,7 @@ export default class Trip extends Component {
           travelers: query.travelers
       };
 
-      //this.searchHotels(hotelQuery);
+      this.searchHotels(hotelQuery);
     }
 
     handleOnClickOffer = index => {

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 export default class Input extends Component {
     constructor() {
@@ -7,7 +9,9 @@ export default class Input extends Component {
 
         this.state = {
             value: '',
-            suggestions: []
+            customValue: '',
+            suggestions: [],
+            open: false
         };
     }
 
@@ -53,11 +57,14 @@ export default class Input extends Component {
                 </div>);
     };
     
-    onChange = (event, { newValue }) => {
-        this.props.onChanged(this.props.id, newValue)
+    onChange = (event, { newValue }, custom=false) => {
         this.setState({
-            value: newValue
+            ...this.state,
+            open: false,
+            value: newValue,
+            customValue: custom ? newValue : ''
         });
+        this.props.onChanged(this.props.id, newValue);
     };
 
     onSuggestionsFetchRequested = ({ value }) => {
@@ -98,7 +105,40 @@ export default class Input extends Component {
                         inputProps={inputProps}
                         shouldRenderSuggestions={this.shouldRenderSuggestions}
                     />
-                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="form--input-group--label form--input-group--label--date">{this.props.name}</label>}
+                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="input--label">{this.props.name}</label>}
+                </div>
+            );
+        }
+        else if (this.props.type === "dropdown") {
+            return (
+                <div className={"form--input-group" + (this.props.inline ? ` form--input-group--inline form--input-group--inline--${this.props.pos}` : "")}>
+                    <div className={"input--dropdown" + (this.state.open ? " input--dropdown--open" : "")}>
+                        <div onClick={() => this.setState({...this.state, open: !this.state.open})} className="input--dropdown--button">{this.state.value === '' ? 'Select an option' : this.state.value}</div>
+                        <FontAwesomeIcon onClick={() => this.setState({...this.state, open: !this.state.open})} className="input--dropdown--icon" icon={faChevronDown} />
+                        <div className={"input--dropdown--items" + (this.state.open ? " input--dropdown--items--open" : "")}>
+                            {
+                                this.props.data.map(item => (
+                                    <div key={item.data} onClick={(e) => this.onChange(e, {newValue: item.name})} className="input--dropdown--item">{item.name}</div>
+                                ))
+                            }
+                        </div>
+                    </div>
+                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="input--label">{this.props.name}</label>}
+                </div>
+            );
+        }
+        else if (this.props.type === "number") {
+            return (
+                <div className={"form--input-group" + (this.props.inline ? ` form--input-group--inline form--input-group--inline--${this.props.pos}` : "")}>
+                    <div className="input--number">
+                        {
+                            this.props.data.map(item => (
+                                <div key={item.data} onClick={(e) => this.onChange(e, {newValue: item.name})} className={"input--number--item" + (this.state.value === item.name ? " input--number--item--selected" : "")}>{item.name}</div>
+                            ))
+                        }
+                        <input value={this.state.customValue} onChange={(e) => this.onChange(e, {newValue: e.target.value}, true)} type="number" min={this.props.validation.min} max={this.props.validation.max} step={this.props.validation.step} placeholder="###" className="input--number--item--input" />
+                    </div>
+                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="input--label">{this.props.name}</label>}
                 </div>
             );
         }
@@ -106,7 +146,7 @@ export default class Input extends Component {
             return (
                 <div className={"form--input-group" + (this.props.inline ? ` form--input-group--inline form--input-group--inline--${this.props.pos}` : "")}>
                     <input id={this.props.id} placeholder={this.props.name} name={this.props.id} type='date' required={this.props.validation.reqired} min={this.props.validation.min} max={this.props.validation.max} onChange={(event) => this.props.onChanged(this.props.id, event.target.value)} className="form--input-group--input form--input-group--input--date" />
-                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="form--input-group--label form--input-group--label--date">{this.props.name}</label>}
+                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="input--label">{this.props.name}</label>}
                 </div>
             );
         }
@@ -114,7 +154,7 @@ export default class Input extends Component {
             return (
                 <div className={"form--input-group" + (this.props.inline ? ` form--input-group--inline form--input-group--inline--${this.props.pos} form--input-group--inline--budget` : "")}>
                     <input id={this.props.id} placeholder={this.props.name} name={this.props.id} type='number' required={this.props.validation.reqired} step={this.props.validation.step} min={this.props.validation.min} max={this.props.validation.max} onChange={(event) => this.props.onChanged(this.props.id, event.target.value)} className="form--input-group--input form--input-group--input--number form--input-group--input--budget" />
-                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="form--input-group--label form--input-group--label--budget-label">{this.props.name}</label>}
+                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="input--label">{this.props.name}</label>}
                     <label className="form--input-group--label form--input-group--label--budget-currency">€</label>
                 </div>
             );
@@ -123,7 +163,7 @@ export default class Input extends Component {
             return (
                 <div className={"form--input-group" + (this.props.inline ? ` form--input-group--inline form--input-group--inline--${this.props.pos}` : "")}>
                     <input id={this.props.id} placeholder={this.props.name} name={this.props.id} type='number' required={this.props.validation.reqired} step={this.props.validation.step} min={this.props.validation.min} max={this.props.validation.max} onChange={(event) => this.props.onChanged(this.props.id, event.target.value)} className="form--input-group--input form--input-group--input--number" />
-                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="form--input-group--label form--input-group--label--number">{this.props.name}</label>}
+                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="input--label">{this.props.name}</label>}
                 </div>
             );
         }
@@ -131,7 +171,7 @@ export default class Input extends Component {
             return (
                 <div className={"form--input-group" + (this.props.inline ? ` form--input-group--inline form--input-group--inline--${this.props.pos}` : "")}>
                     <input id={this.props.id} placeholder={this.props.name} name={this.props.id} type={this.props.type} required={this.props.validation.reqired} onChange={(event) => this.props.onChanged(this.props.id, event.target.value)} className="form--input-group--input" />
-                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="form--input-group--label">{this.props.name}</label>}
+                    {this.props.noLabel ? "" : <label htmlFor={this.props.id} className="input--label">{this.props.name}</label>}
                 </div>
             );
         }

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkedAlt, faPlaneDeparture, faBoxOpen, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkedAlt, faPlaneArrival, faPlaneDeparture, faBoxOpen, faHome } from '@fortawesome/free-solid-svg-icons';
 import { HashLink } from 'react-router-hash-link';
 import Offer from '../../components/Home/Offer/Offer';
 import Form from '../../components/Form/Form';
 import NotificationSystem from '../../components/NotificationSystem/NotificationSystem';
+import Input from '../../components/Form/Input/Input';
+import DatePicker from '../../components/DatePicker/DatePicker';
 
 const cities = [
   {
@@ -894,6 +896,7 @@ class Home extends Component {
     this.state =  { 
       headerImg: 1,
       selectedPlace: 'everywhere',
+      tripFormValues: {},
       offers: [
         {
           place: "asia",
@@ -961,11 +964,12 @@ class Home extends Component {
     this.setState({...this.state, selectedPlace: event.target.innerText.toLowerCase()});
   }
 
-  handleCreateTrip = (values, event) => {
+  handleCreateTrip = event => {
     event.preventDefault();
+    let values = {...this.state.tripFormValues};
     let departing = new Date(values.departing);
     let arriving = new Date(values.arriving);
-    if (!(departing < arriving) || values.from === values.to) {
+    if (!(departing < arriving) || values.from === values.to || values.travelers === '' || values.budget === '' || !values.budget || !values.travelers) {
       return;
     }
 
@@ -993,6 +997,21 @@ class Home extends Component {
     return date.getFullYear() + "-" + this.formatMonth(date.getMonth()+1) + "-" + this.formatMonth(date.getDate());
   }
 
+  capitalize = value => {
+    return (value.charAt(0).toUpperCase() + value.slice(1, value.length)).replace(/_/g, " ");
+  }
+
+  handleOnFormValueChange = (name, value) => {
+    let tripFormValues = {...this.state.tripFormValues};
+    if (name === "deparingarriving") {
+      tripFormValues.departing = value.departing;
+        tripFormValues.arriving = value.arriving;
+    }else {
+      tripFormValues[name] = value; 
+    }
+    this.setState({...this.state, tripFormValues});
+}
+
   render() {
 
     const destinationAirportsData = [
@@ -1017,16 +1036,29 @@ class Home extends Component {
       {name: "First", data: "first"}
     ];
 
+    const budgetData = [
+      {name: "500€", data: "500"},
+      {name: "1000€", data: "1000"},
+      {name: "2000€", data: "2000"},
+      {name: "5000€", data: "3000"}
+    ];
+    const travelersData = [
+      {name: "1", data: "1"},
+      {name: "2", data: "2"},
+      {name: "3", data: "3"},
+      {name: "4", data: "4"}
+    ];
+
     let todayDate = new Date();
-    const createTripFormInputs = [
+    const inputs = [
       {name: 'from', validation: {reqired: true}, data: sourceAirportsData, type: 'autosuggest'},
       {name: 'to', validation: {reqired: true}, data: destinationAirportsData, type: 'autosuggest'},
       {name: 'departing', data: {}, validation: {reqired: true, min: this.formatDate(todayDate), max: this.formatDate(new Date(todayDate.getFullYear()+1, todayDate.getMonth(), todayDate.getDate()))}, type: 'date'},
       {name: 'arriving', data: {}, validation: {reqired: true, min: this.formatDate(todayDate), max: this.formatDate(new Date(todayDate.getFullYear()+1, todayDate.getMonth(), todayDate.getDate()))}, type: 'date'},
-      {name: 'minimum_hotel_quallity', validation: {reqired: true}, data: hotelQualityData, type: 'autosuggest'},
-      {name: 'plane_cabin_class', validation: {reqired: true}, data: cabinClassData, type: 'autosuggest'},
-      {name: 'budget', data: {}, validation: {reqired: true, min: 100, max: 1000000, step: 100}, type: 'number'},
-      {name: 'travelers', data: {}, validation: {reqired: true, min: 1, max: 16, step: 1}, type: 'number'}
+      {name: 'minimum_hotel_quallity', validation: {reqired: true}, data: hotelQualityData, type: 'dropdown'},
+      {name: 'plane_cabin_class', validation: {reqired: true}, data: cabinClassData, type: 'dropdown'},
+      {name: 'budget', data: budgetData, validation: {reqired: true, min: 5100, max: 100000, step: 100}, type: 'number'},
+      {name: 'travelers', data: travelersData, validation: {reqired: true, min: 5, max: 16, step: 1}, type: 'number'}
     ];
 
     return (
@@ -1126,7 +1158,31 @@ class Home extends Component {
         </section>
         <section id="createatrip" className="createatrip">
           <h1 className="createatrip--heading heading-1">Create a trip</h1>
-          <Form place="home" inputs={createTripFormInputs} onSubmit={this.handleCreateTrip} />
+          {/* UGLY OLD WAY <Form place="home" inputs={createTripFormInputs} onSubmit={this.handleCreateTrip} /> */}
+          <Form className="createatrip--form" onSubmit={this.handleCreateTrip}>
+              <div className="createatrip--form--input-group">
+                  <FontAwesomeIcon icon={faPlaneDeparture} className="createatrip--form--input-group--icon createatrip--form--input-group--icon--1" />
+                  <FontAwesomeIcon icon={faPlaneArrival} className="createatrip--form--input-group--icon createatrip--form--input-group--icon--2" />
+                  <Input key={inputs[0].name} data={inputs[0].data} validation={inputs[0].validation} type={inputs[0].type} onChanged={this.handleOnFormValueChange} name={this.capitalize(inputs[0].name)} id={inputs[0].name} />
+                  <Input key={inputs[1].name} data={inputs[1].data} validation={inputs[1].validation} type={inputs[1].type} onChanged={this.handleOnFormValueChange} name={this.capitalize(inputs[1].name)} id={inputs[1].name} />
+              </div>
+              <div className="createatrip--form--input-group">
+                  <DatePicker onChanged={this.handleOnFormValueChange} type="range" placeholder="Outbound Date" placeholder2="Return Date" />
+              </div>
+              <div className="createatrip--form--input-group">
+                  <Input key={inputs[4].name} data={inputs[4].data} validation={inputs[4].validation} type={inputs[4].type} onChanged={this.handleOnFormValueChange} name={this.capitalize(inputs[4].name)} id={inputs[4].name} />
+              </div>
+              <div className="createatrip--form--input-group">
+                  <Input key={inputs[5].name} data={inputs[5].data} validation={inputs[5].validation} type={inputs[5].type} onChanged={this.handleOnFormValueChange} name={this.capitalize(inputs[5].name)} id={inputs[5].name} />
+              </div>
+              <div className="createatrip--form--input-group">
+                  <Input key={inputs[6].name} data={inputs[6].data} validation={inputs[6].validation} type={inputs[6].type} onChanged={this.handleOnFormValueChange} name={this.capitalize(inputs[6].name)} id={inputs[6].name} />
+              </div>
+              <div className="createatrip--form--input-group">
+                  <Input key={inputs[7].name} data={inputs[7].data} validation={inputs[7].validation} type={inputs[7].type} onChanged={this.handleOnFormValueChange} name={this.capitalize(inputs[7].name)} id={inputs[7].name} />
+              </div>
+              <input value="Create a Trip" className="form-home--input-group--submit btn btn--important" type="submit" />
+          </Form>
         </section>
         <section className="footer">
           <p className="footer--text">
